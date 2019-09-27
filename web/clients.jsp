@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="model.cliente.Cliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -49,7 +50,7 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="inputPassword">Senha</label>
-                                                <input type="text" name="senha" class="form-control" id="inputPassword" placeholder="Insira a senha...">
+                                                <input type="password" name="senha" class="form-control" id="inputPassword" placeholder="Insira a senha...">
                                             </div>                                               
                                         </div> 
                                         <button type="submit" class="btn dark mt-3 mb-5 sm-0" style="background-color: #E97568">Cadastrar</button>
@@ -70,10 +71,16 @@
                 <div class="collapse multi-collapse" id="listClientDiv">
                     <div class="row pb-3">
                         <div class="mx-5">
+                            <%
+                                /* Recupera da requisição um objeto que representa uma lista de categorias */
+                                List<Cliente> clientes = (List<Cliente>) request.getAttribute("clientes");
+                                /* Se o objeto que representa lista de categorias for difrentes de nulo e não for uma lista vazia */
+                                if (clientes != null && clientes.size() > 0){
+                                    /* Exibir os dados de categorias em uma tabela HTML */
+                            %>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
                                         <th scope="col">id</th>
                                         <th scope="col">Nome Completo</th>
                                         <th scope="col">Nome de Usuário</th>
@@ -83,35 +90,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <%
+                                    for (Cliente c: clientes) {
+                                    %>
                                     <tr>
-                                        <th scope="row">1</th>
-                                        <td>#58889C</td>
-                                        <td>Jonathan Joestar</td>
-                                        <td>original_jojo</td>
-                                        <td>jojo@hotmail.com</td>
-                                        <td>erinaS2</td>
-                                        <td>England</td>
+                                        <td><%= c.getId()%></td>
+                                        <td><%= c.getNome()%></td>
+                                        <td><%= c.getLogin()%></td>
+                                        <td><%= c.getEmail()%></td>
+                                        <td><%= c.getSenha()%></td>
+                                        <td><%= c.getEndereco()%></td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>#E97568</td>
-                                        <td>Dio Brando</td>
-                                        <td>kono_dio_da</td>
-                                        <td>diobrando@hotmail.com</td>
-                                        <td>wryyyyyy</td>
-                                        <td>England</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>#F4E19F</td>
-                                        <td>Giorno Giovanna</td>
-                                        <td>arrive_derci</td>
-                                        <td>giogio@gmail.com</td>
-                                        <td>goldenwind123</td>
-                                        <td>ItÃ¡lia</td>
-                                    </tr>
+                                    <%
+                                    }
+                                    %>
                                 </tbody>
                             </table>
+                            <%
+                            } else {
+                            /* Exibir uma mensagem para informar que não existem clientes a serem exibidos */
+                            %>
+                            <div>Não existem categorias a serem exibidas</div>
+                            <%
+                            }    
+                            %>
                         </div>                            
                     </div>    
                 </div>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.cliente;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ import model.cliente.ClienteModel;
 
 /**
  *
- * @author leoomoreira
+ * @author Luís Eduardo
  */
 public class CadastrarClienteServlet extends HttpServlet {
 
@@ -39,7 +39,9 @@ public class CadastrarClienteServlet extends HttpServlet {
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.inserir(nome, endereco, email, login, senha);
         // saída
-        request.getRequestDispatcher("clients.jsp").forward(request, response);
+        /* Direciona para o servlet de listar clientes, para atualizar a lista exibida com o valor novo inserido */
+        request.getRequestDispatcher("ListarCliente").forward(request, response);
+        // request.getRequestDispatcher("clients.jsp").forward(request, response);
     }
 
 }

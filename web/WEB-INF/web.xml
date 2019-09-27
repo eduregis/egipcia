@@ -2,15 +2,27 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>controller.LoginServlet</servlet-class>
+        <servlet-class>controller.session.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>controller.LogoutServlet</servlet-class>
+        <servlet-class>controller.session.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CadastrarClienteServlet</servlet-name>
-        <servlet-class>controller.CadastrarClienteServlet</servlet-class>
+        <servlet-class>controller.cliente.CadastrarClienteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CadastrarCategoriaServlet</servlet-name>
+        <servlet-class>controller.categoria.CadastrarCategoriaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListarCategoriaServlet</servlet-name>
+        <servlet-class>controller.categoria.ListarCategoriaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListarClienteServlet</servlet-name>
+        <servlet-class>controller.cliente.ListarClienteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -23,6 +35,18 @@
     <servlet-mapping>
         <servlet-name>CadastrarClienteServlet</servlet-name>
         <url-pattern>/CadastrarCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarCategoriaServlet</servlet-name>
+        <url-pattern>/CadastrarCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListarCategoriaServlet</servlet-name>
+        <url-pattern>/ListarCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListarClienteServlet</servlet-name>
+        <url-pattern>/ListarCliente</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -9,7 +9,7 @@ package model.administrador;
  *
  * @author Luís Eduardo
  * 
- * Classe que representa a entidade cliente
+ * Classe que representa a entidade administrador
  */
 public class Administrador {
     

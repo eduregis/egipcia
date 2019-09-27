@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.session;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -31,7 +31,7 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.invalidate();
-        request.setAttribute("mensagem", "Sua sessão foi encerrada");
+        request.setAttribute("mensagem", "Sua sessão foi encerrada!");
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 

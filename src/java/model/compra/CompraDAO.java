@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.categoria;
+package model.compra;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,10 +18,10 @@ import java.util.List;
  *
  * @author Luís Eduardo
  *
- * Classe que representa os acessos aos dados de categorias persistidas em um
+ * Classe que representa os acessos aos dados de compras persistidas em um
  * banco de dados relacional
  */
-public class CategoriaDAO {
+public class CompraDAO {
 
     private static final String JDBC_DRIVER = "org.postgresql.Driver";
     private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/egipcia-ecommerce";
@@ -28,50 +29,52 @@ public class CategoriaDAO {
     private static final String JDBC_SENHA = "123456";
 
     /**
-     * Método utilizado para listar todos as categorias registradas
+     * Método utilizado para listar todos as compras registradas
      *
      * @return
      */
-    public List<Categoria> listarCategorias() {
-        List<Categoria> resultado = new ArrayList<Categoria>();
+    public List<Compra> listarCompras() {
+        List<Compra> resultado = new ArrayList<Compra>();
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT id, descricao FROM categorias");
+            ResultSet resultSet = statement.executeQuery("SELECT id, cliente_id, data FROM compras");
             while (resultSet.next()) {
-                Categoria categoria = new Categoria();
-                categoria.setId(resultSet.getInt("id"));
-                categoria.setDescricao(resultSet.getString("descricao"));
-                resultado.add(categoria);
+                Compra compra = new Compra();
+                compra.setId(resultSet.getInt("id"));
+                compra.setCliente_id(resultSet.getInt("cliente_id"));
+                compra.setData(resultSet.getDate("data"));
+                resultado.add(compra);
             }
             resultSet.close();
             statement.close();
             connection.close();
         } catch (Exception ex) {
-            return new ArrayList<Categoria>();
+            return new ArrayList<Compra>();
         }
         return resultado;
     }
 
     /**
-     * Método utilizado para listar uma categoria pelo id
+     * Método utilizado para listar uma compra pelo id
      *
      * @param id
      * @return
      */
-    public Categoria listarCategoria(int id) {
-        Categoria categoria = null;
+    public Compra listarCompra(int id) {
+        Compra compra = null;
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareCall("SELECT id, descricao FROM categorias WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareCall("SELECT id, cliente_id, data FROM compras WHERE id = ?");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                categoria = new Categoria();
-                categoria.setId(resultSet.getInt("id"));
-                categoria.setDescricao(resultSet.getString("descricao"));
+                compra = new Compra();
+                compra.setId(resultSet.getInt("id"));
+                compra.setCliente_id(resultSet.getInt("cliente_id"));
+                compra.setData(resultSet.getDate("data"));              
             }
             resultSet.close();
             preparedStatement.close();
@@ -79,22 +82,24 @@ public class CategoriaDAO {
         } catch (Exception ex) {
             return null;
         }
-        return categoria;
+        return compra;
     }
 
     /**
-     * Método utilizado para inserir uma nova categoria
+     * Método utilizado para inserir uma nova compra
      *
-     * @param descricao
+     * @param cliente_id
+     * @param data
      * @return
      */
-    public boolean inserir(String descricao) {
+    public boolean inserir(int cliente_id, Date data) {
         boolean resultado = false;
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO categorias (descricao) VALUES (?)");
-            preparedStatement.setString(1, descricao);
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO compras (cliente_id, data) VALUES (?, ?)");
+            preparedStatement.setInt(1, cliente_id);
+            preparedStatement.setDate(2, data);
             resultado = (preparedStatement.executeUpdate() > 0);
             preparedStatement.close();
             connection.close();
@@ -106,20 +111,22 @@ public class CategoriaDAO {
     }
 
     /**
-     * Método utilizado para alterar uma categoria já existente
+     * Método utilizado para alterar uma compra já existente
      *
      * @param id
-     * @param descricao
+     * @param cliente_id
+     * @param data
      * @return
      */
-    public boolean alterar(int id, String descricao) {
+    public boolean alterar(int id, int cliente_id, Date data) {
         boolean resultado = false;
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE categorias SET descricao = ? WHERE id = ?");
-            preparedStatement.setString(1, descricao);
-            preparedStatement.setInt(2, id);
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE compras SET cliente_id = ?, data = ? WHERE id = ?");
+            preparedStatement.setInt(1, cliente_id);
+            preparedStatement.setDate(2, data);
+            preparedStatement.setInt(3, id);
             resultado = (preparedStatement.executeUpdate() > 0);
             preparedStatement.close();
             connection.close();
@@ -130,7 +137,7 @@ public class CategoriaDAO {
     }
 
     /**
-     * Método para deletar uma categoria já existente
+     * Método para deletar uma compra já existente
      *
      * @param id
      * @return
@@ -140,7 +147,7 @@ public class CategoriaDAO {
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM categorias WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM compras WHERE id = ?");
             preparedStatement.setInt(1, id);
             resultado = (preparedStatement.executeUpdate() > 0);
             preparedStatement.close();

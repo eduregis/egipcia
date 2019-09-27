@@ -19,6 +19,14 @@
             </div>            
             <div class="row pb-3">
                 <div class="col-8 mx-auto">
+                    <%
+                        String mensagem = (String)request.getAttribute("mensagem");
+                        if(mensagem != null && mensagem.length() > 0){
+                            %>
+                            <p class="mb-3" style="color: #E97568"><%=mensagem%></p>
+                    <%
+                        }
+                    %>
                     <form action="Login" method="post" style="color: #58889C">
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -33,15 +41,7 @@
                             </div>
                         </div>                        
                         <button type="submit" class="btn dark mt-3 mb-5 sm-0" type="submit" style="background-color: #E97568">Entrar</button>
-                    </form>
-                    <%
-                        String mensagem = (String)request.getAttribute("mensagem");
-                        if(mensagem != null && mensagem.length() > 0){
-                            %>
-                           <div><%=mensagem%></div>
-                    <%
-                        }
-                    %>
+                    </form>                    
                 </div>
             </div>
         </div>

@@ -29,7 +29,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-3">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Página Principal <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.jsp">Página Principal <span class="sr-only">(current)</span></a>
                     </li>   
                     <li class="nav-item">
                         <a class="nav-link" href="cart.jsp">Carrinho</a>
@@ -42,9 +42,9 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrador</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="clients.jsp">Clientes</a>
+                            <a class="dropdown-item" href="ListarCliente">Clientes</a>
                             <a class="dropdown-item" href="products.jsp">Produtos</a>
-                            <a class="dropdown-item" href="categories.jsp">Categorias</a>
+                            <a class="dropdown-item" href="ListarCategoria">Categorias</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="report.jsp">Relatórios</a>
                         </div>

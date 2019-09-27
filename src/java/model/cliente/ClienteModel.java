@@ -5,6 +5,8 @@
  */
 package model.cliente;
 
+import java.util.List;
+
 /**
  *
  * @author Luís Eduardo
@@ -21,4 +23,8 @@ public class ClienteModel {
         return dao.inserir(nome, endereco, login, senha, email);
     }
     
+    public List<Cliente> listar() {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        return clienteDAO.listarClientes();
+    }
 }

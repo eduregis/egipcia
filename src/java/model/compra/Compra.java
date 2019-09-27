@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.categoria;
+package model.compra;
+
+import java.sql.Date;
 
 /**
  *
@@ -11,10 +13,11 @@ package model.categoria;
  * 
  * Classe que representa a entidade categoria
  */
-public class Categoria {
+public class Compra {
     
     private int id;
-    private String descricao;
+    private int cliente_id;
+    private Date data;
     
     public int getId() {
         return id;
@@ -24,12 +27,22 @@ public class Categoria {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public int getCliente_id() {
+        return cliente_id;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }     
+    public void setCliente_id(int cliente_id) {
+        this.cliente_id = cliente_id;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+        
 }
 

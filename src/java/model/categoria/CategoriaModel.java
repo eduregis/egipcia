@@ -5,6 +5,8 @@
  */
 package model.categoria;
 
+import java.util.List;
+
 /**
  *
  * @author Luís Eduardo
@@ -14,6 +16,11 @@ public class CategoriaModel {
     public boolean inserir(String descricao) {
         CategoriaDAO dao = new CategoriaDAO();
         return dao.inserir(descricao);
+    }
+    
+    public List<Categoria> listar() {
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        return categoriaDAO.listarCategorias();
     }
     
 }

@@ -17,7 +17,7 @@
         String mensagem = (String) request.getAttribute("mensagem");
         if (mensagem != null && mensagem.length() > 0) {
     %>
-    <div><%=mensagem%></div>
+    <div class="container" style="color: #E97568"><%=mensagem%></div> 
     <%
         }
     %>
