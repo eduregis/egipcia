@@ -21,4 +21,9 @@ public class AdministradorModel {
         return dao.inserir(nome, login, senha, email);
     }
     
+    public Administrador listar(int id) {
+        AdministradorDAO administradorDAO = new AdministradorDAO();
+        return administradorDAO.listarAdministrador(id);
+    }
+    
 }

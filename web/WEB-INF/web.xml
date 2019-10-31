@@ -24,6 +24,70 @@
         <servlet-name>ListarClienteServlet</servlet-name>
         <servlet-class>controller.cliente.ListarClienteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeletarCategoriaServlet</servlet-name>
+        <servlet-class>controller.categoria.DeletarCategoriaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MostrarCategoriaServlet</servlet-name>
+        <servlet-class>controller.categoria.MostrarCategoriaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AtualizarCategoriaServlet</servlet-name>
+        <servlet-class>controller.categoria.AtualizarCategoriaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletarClienteServlet</servlet-name>
+        <servlet-class>controller.cliente.DeletarClienteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MostrarClienteServlet</servlet-name>
+        <servlet-class>controller.cliente.MostrarClienteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AtualizarClienteServlet</servlet-name>
+        <servlet-class>controller.cliente.AtualizarClienteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CadastrarProdutoServlet</servlet-name>
+        <servlet-class>controller.produto.CadastrarProdutoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListarProdutoServlet</servlet-name>
+        <servlet-class>controller.produto.ListarProdutoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MostrarProdutoServlet</servlet-name>
+        <servlet-class>controller.produto.MostrarProdutoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletarProdutoServlet</servlet-name>
+        <servlet-class>controller.produto.DeletarProdutoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AtualizarProdutoServlet</servlet-name>
+        <servlet-class>controller.produto.AtualizarProdutoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UploadFotoProduto</servlet-name>
+        <servlet-class>controller.produto.UploadFotoProdutoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MostrarFotoProduto</servlet-name>
+        <servlet-class>controller.produto.MostrarFotoProdutoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadFotoProduto</servlet-name>
+        <servlet-class>controller.produto.DownloadFotoProdutoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MostrarAdministradorServlet</servlet-name>
+        <servlet-class>controller.administrador.MostrarAdministradorServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MostrarClienteConta</servlet-name>
+        <servlet-class>controller.cliente.MostrarClienteContaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -47,6 +111,70 @@
     <servlet-mapping>
         <servlet-name>ListarClienteServlet</servlet-name>
         <url-pattern>/ListarCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletarCategoriaServlet</servlet-name>
+        <url-pattern>/DeletarCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MostrarCategoriaServlet</servlet-name>
+        <url-pattern>/MostrarCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtualizarCategoriaServlet</servlet-name>
+        <url-pattern>/AtualizarCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletarClienteServlet</servlet-name>
+        <url-pattern>/DeletarCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MostrarClienteServlet</servlet-name>
+        <url-pattern>/MostrarCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtualizarClienteServlet</servlet-name>
+        <url-pattern>/AtualizarCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarProdutoServlet</servlet-name>
+        <url-pattern>/CadastrarProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListarProdutoServlet</servlet-name>
+        <url-pattern>/ListarProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MostrarProdutoServlet</servlet-name>
+        <url-pattern>/MostrarProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletarProdutoServlet</servlet-name>
+        <url-pattern>/DeletarProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtualizarProdutoServlet</servlet-name>
+        <url-pattern>/AtualizarProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadFotoProduto</servlet-name>
+        <url-pattern>/UploadFotoProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MostrarFotoProduto</servlet-name>
+        <url-pattern>/MostrarFotoProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadFotoProduto</servlet-name>
+        <url-pattern>/DownloadFotoProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MostrarAdministradorServlet</servlet-name>
+        <url-pattern>/MostrarAdministradorServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MostrarClienteConta</servlet-name>
+        <url-pattern>/MostrarClienteConta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

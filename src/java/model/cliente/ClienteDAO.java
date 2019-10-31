@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author Lúis Eduardo
+ * @author Luís Eduardo
  *
  * Classe que representa os acessos aos dados de clientes persistidas em um
  * banco de dados relacional
@@ -43,10 +43,10 @@ public class ClienteDAO {
                 Cliente cliente = new Cliente();
                 cliente.setId(resultSet.getInt("id"));
                 cliente.setNome(resultSet.getString("nome"));
-                cliente.setSenha(resultSet.getString("endereco"));
+                cliente.setEndereco(resultSet.getString("endereco"));
                 cliente.setLogin(resultSet.getString("login"));
                 cliente.setSenha(resultSet.getString("senha"));
-                cliente.setSenha(resultSet.getString("email"));
+                cliente.setEmail(resultSet.getString("email"));
                 resultado.add(cliente);
             }
             resultSet.close();
@@ -76,10 +76,10 @@ public class ClienteDAO {
                 cliente = new Cliente();
                 cliente.setId(resultSet.getInt("id"));
                 cliente.setNome(resultSet.getString("nome"));
-                cliente.setSenha(resultSet.getString("endereco"));
+                cliente.setEndereco(resultSet.getString("endereco"));
                 cliente.setLogin(resultSet.getString("login"));
                 cliente.setSenha(resultSet.getString("senha"));
-                cliente.setSenha(resultSet.getString("email"));
+                cliente.setEmail(resultSet.getString("email"));
             }
             resultSet.close();
             preparedStatement.close();

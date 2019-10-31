@@ -43,7 +43,7 @@
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrador</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="ListarCliente">Clientes</a>
-                            <a class="dropdown-item" href="products.jsp">Produtos</a>
+                            <a class="dropdown-item" href="ListarProduto">Produtos</a>
                             <a class="dropdown-item" href="ListarCategoria">Categorias</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="report.jsp">Relatórios</a>
@@ -63,17 +63,23 @@
                         boolean isClientLogged = (cliente != null && cliente instanceof Cliente);
                         if (isClientLogged) {
                     %>
-                    <li class="nav-item">
-                        <a class="nav-link">Olá, <%= cliente.getNome()%></a>
-                    </li>                
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Olá, <%= cliente.getNome()%></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="MostrarClienteContaServlet?id=<%= cliente.getId() %>">Minha conta</a>
+                        </div>
+                    </li>                 
                     <li class="nav-item">
                         <a class="nav-link" href="Logout">Sair</a>
                     </li>
                     <%
                     } else if (isAdminLogged) {
                     %>
-                    <li class="nav-item">
-                        <a class="nav-link">Olá, <%= administrador.getNome()%></a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Olá, <%= administrador.getNome()%></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="MostrarAdministradorServlet?id=<%= administrador.getId() %>">Minha conta</a>
+                        </div>
                     </li>                
                     <li class="nav-item">
                         <a class="nav-link" href="Logout">Sair</a>

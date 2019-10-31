@@ -37,7 +37,7 @@ public class CadastrarClienteServlet extends HttpServlet {
         String senha = request.getParameter("senha");
         // processamento
         ClienteModel clienteModel = new ClienteModel();
-        clienteModel.inserir(nome, endereco, email, login, senha);
+        clienteModel.inserir(nome, endereco, login, senha, email);
         // saída
         /* Direciona para o servlet de listar clientes, para atualizar a lista exibida com o valor novo inserido */
         request.getRequestDispatcher("ListarCliente").forward(request, response);

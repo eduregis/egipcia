@@ -38,14 +38,15 @@ public class ProdutoDAO {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT id, descricao, preco, foto, quantidade FROM produtos");
+            ResultSet resultSet = statement.executeQuery("SELECT id, nome, descricao, qtd, preco, imagem FROM produtos");
             while (resultSet.next()) {
                 Produto produto = new Produto();
                 produto.setId(resultSet.getInt("id"));
+                produto.setNome(resultSet.getString("nome"));
                 produto.setDescricao(resultSet.getString("descricao"));
+                produto.setQuantidade(resultSet.getInt("qtd"));
                 produto.setPreco(resultSet.getDouble("preco"));
-                produto.setFoto(resultSet.getString("foto"));
-                produto.setQuantidade(resultSet.getInt("quantidade"));
+                produto.setFoto(resultSet.getString("imagem"));
                 resultado.add(produto);
             }
             resultSet.close();
@@ -68,16 +69,17 @@ public class ProdutoDAO {
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareCall("SELECT id, descricao, preco, foto, quantidade FROM produtos WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareCall("SELECT id, nome, descricao, qtd, preco, imagem FROM produtos WHERE id = ?");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 produto = new Produto();
                 produto.setId(resultSet.getInt("id"));
+                produto.setNome(resultSet.getString("nome"));
                 produto.setDescricao(resultSet.getString("descricao"));
+                produto.setQuantidade(resultSet.getInt("qtd"));
                 produto.setPreco(resultSet.getDouble("preco"));
-                produto.setFoto(resultSet.getString("foto"));
-                produto.setQuantidade(resultSet.getInt("quantidade"));
+                produto.setFoto(resultSet.getString("imagem"));
             }
             resultSet.close();
             preparedStatement.close();
@@ -91,22 +93,23 @@ public class ProdutoDAO {
     /**
      * Método utilizado para inserir uma nova produto
      *
+     * @param nome
      * @param descricao
+     * @param qtd
      * @param preco
-     * @param foto
-     * @param quantidade
+     * @param imagem
      * @return
      */
-    public boolean inserir(String descricao, double preco, String foto, int quantidade) {
+    public boolean inserir(String nome, String descricao, int qtd, double preco) {
         boolean resultado = false;
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO categorias (descricao, preco, foto, quantidade) VALUES (? ,? ,? ,?)");
-            preparedStatement.setString(1, descricao);
-            preparedStatement.setDouble(2, preco);
-            preparedStatement.setString(3, foto);
-            preparedStatement.setInt(4, quantidade);
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO produtos (nome, descricao, qtd, preco) VALUES (? ,? ,? ,?)");
+            preparedStatement.setString(1, nome);
+            preparedStatement.setString(2, descricao);
+            preparedStatement.setInt(3, qtd);
+            preparedStatement.setDouble(4, preco);
             resultado = (preparedStatement.executeUpdate() > 0);
             preparedStatement.close();
             connection.close();
@@ -121,27 +124,47 @@ public class ProdutoDAO {
      * Método utilizado para alterar um produto já existente
      *
      * @param id
+     * @param nome
      * @param descricao
+     * @param qtd
      * @param preco
-     * @param foto
-     * @param quantidade
+     * @param imagem
      * @return
      */
-    public boolean alterar(int id, String descricao, double preco, String foto, int quantidade) {
+    public boolean alterar(int id, String nome, String descricao, int qtd, double preco) {
         boolean resultado = false;
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE produtos SET descricao = ?, preco = ?, foto = ?, quantidade = ? WHERE id = ?");
-            preparedStatement.setString(1, descricao);
-            preparedStatement.setDouble(2, preco);
-            preparedStatement.setString(3, foto);
-            preparedStatement.setInt(4, quantidade);
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE produtos SET nome = ?, descricao = ?, qtd = ?, preco = ? WHERE id = ?");
+            preparedStatement.setString(1, nome);
+            preparedStatement.setString(2, descricao);
+            preparedStatement.setInt(3, qtd);
+            preparedStatement.setDouble(4, preco);
             preparedStatement.setInt(5, id);
             resultado = (preparedStatement.executeUpdate() > 0);
             preparedStatement.close();
             connection.close();
         } catch (Exception ex) {
+            return false;
+        }
+        return resultado;
+    }
+    
+    public boolean alterarFoto(int id, String foto) {
+        System.out.println(foto);
+        boolean resultado = false;
+        try {
+            Class.forName(JDBC_DRIVER);
+            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE produtos SET imagem = ? WHERE id = ?");
+            preparedStatement.setString(1, foto);
+            preparedStatement.setInt(2, id);
+            resultado = (preparedStatement.executeUpdate() > 0);
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
             return false;
         }
         return resultado;

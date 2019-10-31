@@ -28,6 +28,7 @@
                 <div id="listCategoriesDiv">
                     <div class="row pb-3">
                         <div class="mx-5">
+                            <h2 style="color: #58889C">Lista de Categorias</h2>
                             <%
                                 /* Recupera da requisição um objeto que representa uma lista de categorias */
                                 List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");
@@ -39,7 +40,8 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">id</th>
-                                        <th scope="col">Nome do Produto</th>                                        
+                                        <th scope="col">Nome do Produto</th>     
+                                        <th scope="col">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -48,7 +50,15 @@
                                     %>
                                     <tr>
                                         <td><%=c.getId() %></td>
-                                        <td><%=c.getDescricao() %></td>                                        
+                                        <td><%=c.getDescricao() %></td>
+                                        <td>
+                                            <a href="MostrarCategoria?id=<%= c.getId() %>" class="mx-2">
+                                                <img src="assets/pencil-edit-button.png">
+                                            </a>
+                                            <a href="DeletarCategoria?id=<%= c.getId() %>">
+                                                <img src="assets/rubbish-bin.png">
+                                            </a>
+                                        </td>
                                     </tr>
                                     <%
                                     }
