@@ -32,7 +32,7 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.invalidate();
         request.setAttribute("mensagem", "Sua sessão foi encerrada!");
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("InicioServlet").forward(request, response);
     }
 
 }

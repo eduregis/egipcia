@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
                 // acertou o login e a senha
                 HttpSession session = request.getSession();
                 session.setAttribute("cliente", cliente);
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                request.getRequestDispatcher("InicioServlet").forward(request, response);
             }
             request.setAttribute("mensagem", "Login ou senha incorreta");
             request.getRequestDispatcher("login.jsp").forward(request, response);

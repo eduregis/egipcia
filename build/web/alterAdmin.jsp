@@ -22,7 +22,7 @@
             </div>            
             <%
             /* Recupera da requisição um objeto que representa um cliente */
-            Administrador adminAlter = (Administrador) request.getAttribute("admin");
+            Administrador adminAlter = (Administrador) request.getAttribute("administrador");
             /* Se o objeto que representa o cliente for diferente de nulo */
             if (adminAlter != null) {
             /* Exibir os dados do admin no formulário HTML para que o usuário possa editá-las */

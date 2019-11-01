@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.administrador.Administrador;
 import model.cliente.ClienteModel;
 
 /**
@@ -51,7 +53,14 @@ public class AtualizarClienteServlet extends HttpServlet {
             request.setAttribute("mensagem","Não foi possível atualizar o cliente");
         }
         // Saída
-        /* Despacha a requisição atual para o servlet ListarCliente no intuito de mostrar todas as categorias e mensagem gerada nesse servlet */
-        request.getRequestDispatcher("ListarCliente").forward(request, response);
+        // Testa se quem está excluindo é o admin
+        HttpSession session = request.getSession();
+        Administrador admin = (Administrador)session.getAttribute("administrador");
+        if(admin != null) {
+            /* Direciona para o servlet de listar clientes, para atualizar a lista exibida com o valor novo inserido */
+            request.getRequestDispatcher("ListarCliente").forward(request, response);
+        } else {
+            request.getRequestDispatcher("InicioServlet").forward(request, response);
+        }
     }
 }

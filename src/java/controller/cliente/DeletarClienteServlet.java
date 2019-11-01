@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.administrador.Administrador;
 import model.cliente.ClienteModel;
 
 /**
@@ -46,7 +48,16 @@ public class DeletarClienteServlet extends HttpServlet {
             request.setAttribute("mensagem","Não foi possível deletar o cliente");
         }
         // Saída
-        /* Despacha a requisição atual para o servlet ListarCliente no intuito de mostrar todas as categorias e mensagem gerada nesse servlet */
-        request.getRequestDispatcher("ListarCliente").forward(request, response);
+        // Testa se quem está excluindo é o admin
+        HttpSession session = request.getSession();
+        Administrador admin = (Administrador)session.getAttribute("administrador");
+        if(admin != null) {
+            /*Caso seja, direciona para o servlet de listar clientes, para atualizar a lista exibida com o valor novo inserido */
+            request.getRequestDispatcher("ListarCliente").forward(request, response);
+        } else {
+             /*Caso não seja, a exclusão acontece e a sessão é encerrada Despacha a requisiç */
+             request.getRequestDispatcher("Logout").forward(request, response);
+        }
+       
     }
 }
