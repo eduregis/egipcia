@@ -98,7 +98,8 @@
                                         <th scope="col">Descrição</th>
                                         <th scope="col">Categoria(s)</th>
                                         <th scope="col">Quantidade</th>
-                                        <th scope="col">Preço unitário</th> 
+                                        <th scope="col">Preço unitário</th>
+                                        <th scope="col">Foto</th>
                                         <th scope="col">&nbsp;</th>
                                     </tr>
                                 </thead>
@@ -108,11 +109,19 @@
                                     %>
                                     <tr>
                                         <th scope="row"><%= p.getId()%></th>
+                                       
                                         <td><%= p.getNome()%></td>
                                         <td><%= p.getDescricao()%></td>
                                         <td></td>
                                         <td><%= p.getQuantidade()%></td>
                                         <td><%= p.getPreco()%></td>
+                                        <td>
+                                            <% if (p.getFoto() != null && p.getFoto().trim().length() > 0) { %>
+                                            <img id="foto" src="MostrarFotoProduto?foto=<%= p.getFoto()%>" width="50" height="50" />
+                                            <% } else { %>
+                                            Sem foto
+                                            <% } %>
+                                        </td>
                                         <td>
                                             <a href="MostrarProduto?id=<%= p.getId() %>" class="mx-2">
                                                 <img src="assets/pencil-edit-button.png">

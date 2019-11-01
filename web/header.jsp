@@ -29,7 +29,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-3">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.jsp">Página Principal <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="InicioServlet">Página Principal <span class="sr-only">(current)</span></a>
                     </li>   
                     <li class="nav-item">
                         <a class="nav-link" href="cart.jsp">Carrinho</a>

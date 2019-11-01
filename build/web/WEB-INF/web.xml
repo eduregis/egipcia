@@ -100,6 +100,10 @@
         <servlet-name>DeletarAdministradorServlet</servlet-name>
         <servlet-class>controller.administrador.DeletarAdministradorServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InicioServlet</servlet-name>
+        <servlet-class>config.InicioServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -200,9 +204,16 @@
         <servlet-name>DeletarAdministradorServlet</servlet-name>
         <url-pattern>/DeletarAdministrador</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InicioServlet</servlet-name>
+        <url-pattern>/InicioServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>InicioServlet</welcome-file>
+    </welcome-file-list>
 </web-app>

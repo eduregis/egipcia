@@ -18,65 +18,27 @@
                 <h1 style="color: #58889C">Seu carrinho!</h1>
                 <hr>
             </div>            
-            <div class="row pb-3">
-                <div class="col-4 mb-3">
-                    <div class="card mx-3" style="width: 18rem; border: solid 1px; color: #9A9174">
-                        <img class="card-img-top p-3" src="assets/egipcia-logo-dark.png" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Nome do Produto</h5>
-                            <p class="card-text" style="color: #51aa3a">R$9,99</p>     
-                            <div class="form-check form-check-inline mb-3">
-                                <label class="form-check-label">Quantidade: </label> 
-                                <input class="form-check-input ml-3" type="number" value="2" style="width: 50px">
-                            </div>    
-                            <form class="form-inline">                                
-                                <div class="form-group col-md-6">
-                                    
-                                </div>                                
-                            </form>  
-                            <button class="btn dark my-2" style="background-color: #E97568">Remover do carrinho</button>
-                        </div>                              
-                    </div>
-                </div> 
-                <div class="col-4 mb-3">
-                    <div class="card mx-3" style="width: 18rem; border: solid 1px; color: #9A9174">
-                        <img class="card-img-top p-3" src="assets/egipcia-logo-dark.png" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Nome do Produto</h5>
-                            <p class="card-text" style="color: #51aa3a">R$9,99</p>     
-                            <div class="form-check form-check-inline mb-3">
-                                <label class="form-check-label">Quantidade: </label> 
-                                <input class="form-check-input ml-3" type="number" value="2" style="width: 50px">
-                            </div>    
-                            <form class="form-inline">                                
-                                <div class="form-group col-md-6">
-                                    
-                                </div>                                
-                            </form>  
-                            <button class="btn dark my-2" style="background-color: #E97568">Remover do carrinho</button>
-                        </div>                              
-                    </div>
+            <div class="row pb-3 pl-3">
+            <%
+                for (int i = 0; i < 4; i++) { 
+            %>
+            <div class="col-4 mb-3">
+                <div class="card" style="width: 18rem; border: solid 1px; color: #9A9174">
+                    <img class="card-img-top p-3" src="assets/egipcia-logo-dark.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Nome do Produto</h5>
+                        <p class="card-text">R$9,99</p>                            
+                        <p class="card-text">Descrição: Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo inventore recusandae, doloremque quas quia eveniet...</p>
+                        <p style="color: #51aa3a">4 em estoque</p>
+                        <h6>Tags: <span class="badge badge-secondary">Tag1</span> <span class="badge badge-secondary">Tag2</span></h6>
+                        <button class="btn dark my-2" type="submit" style="background-color: #E97568">Adicionar ao carrinho</button>
+                    </div>                              
                 </div>
-                <div class="col-4 mb-3">
-                    <div class="card mx-3" style="width: 18rem; border: solid 1px; color: #9A9174">
-                        <img class="card-img-top p-3" src="assets/egipcia-logo-dark.png" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Nome do Produto</h5>
-                            <p class="card-text" style="color: #51aa3a">R$9,99</p>     
-                            <div class="form-check form-check-inline mb-3">
-                                <label class="form-check-label">Quantidade: </label> 
-                                <input class="form-check-input ml-3" type="number" value="2" style="width: 50px">
-                            </div>    
-                            <form class="form-inline">                                
-                                <div class="form-group col-md-6">
-                                    
-                                </div>                                
-                            </form>  
-                            <button class="btn dark my-2" style="background-color: #E97568">Remover do carrinho</button>
-                        </div>                              
-                    </div>
-                </div>  
-            </div>
+            </div> 
+            <%
+                }
+            %>                   
+        </div>
             <form class="ml-3 mt-3" style="color: #58889C">
                 <div class="form-row">
                     <h3>Preço total: R$ 59,94</h3>  

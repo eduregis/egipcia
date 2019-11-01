@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
             // acertou o login e a senha
             HttpSession session = request.getSession();
             session.setAttribute("administrador", administrador);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("InicioServlet").forward(request, response);
         }
         
     }
