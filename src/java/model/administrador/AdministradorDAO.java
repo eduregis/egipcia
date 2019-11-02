@@ -68,7 +68,7 @@ public class AdministradorDAO {
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareCall("SELECT id, nome, endereco, login, senha, email FROM administradores WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareCall("SELECT id, nome, login, senha, email FROM administradores WHERE id = ?");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

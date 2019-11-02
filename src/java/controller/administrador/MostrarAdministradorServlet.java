@@ -37,9 +37,9 @@ public class MostrarAdministradorServlet extends HttpServlet {
         /* Instancia a classe de negocio que trata a requisição deste controle */
         AdministradorModel administradorModel = new AdministradorModel();
         /* Executa o método listar que recupera um administrador pelo identificador */
-        Administrador admin = administradorModel.listar(id);
+        Administrador administrador = administradorModel.listar(id);
         /* Grava o administrador cadastrado no objeto que representa à requisição */
-        request.setAttribute("admin",admin);
+        request.setAttribute("administrador",administrador);
         // Saída
         /* Despacha a requisição atual para o página de atualização do administrador escolhido e mensagem gerada nesse servlet */
         request.getRequestDispatcher("alterAdmin.jsp").forward(request, response);

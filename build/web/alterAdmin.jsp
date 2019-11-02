@@ -1,7 +1,7 @@
 <%@page import="model.categoria.Categoria"%>
 <%@page import="java.util.List"%>
 <%@page import="model.administrador.Administrador"%>
-<%@page import="model.cliente.Cliente"%>
+<%@page import="model.administrador.Administrador"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
     <head>
@@ -17,15 +17,15 @@
         <%@include file="header.jsp"%> 
         <div class="container rounded mb-5" style="background-color: #F7EFE2">
             <div class="mt-3 ml-3 py-3">
-                <h1 style="color: #58889C">Atualizar minha conta de Administrador</h1>
+                <h1 style="color: #58889C">Atualizar Administrador</h1>
                 <hr>
             </div>            
             <%
-            /* Recupera da requisição um objeto que representa um cliente */
-            Administrador adminAlter = (Administrador) request.getAttribute("administrador");
-            /* Se o objeto que representa o cliente for diferente de nulo */
-            if (adminAlter != null) {
-            /* Exibir os dados do admin no formulário HTML para que o usuário possa editá-las */
+            /* Recupera da requisição um objeto que representa um administrador */
+            Administrador administradorAlter = (Administrador) request.getAttribute("administrador");
+            /* Se o objeto que representa o administrador for diferente de nulo */
+            if (administradorAlter != null) {
+            /* Exibir os dados do administrador no formulário HTML para que o usuário possa editá-las */
             %>
             <div class="row pb-3">              
                 <div class="row">
@@ -36,34 +36,38 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-2">
                                             <label for="inputId">Id</label>
-                                        <input class="form-control mr-sm-2" type="text" name="id" value="<%= adminAlter.getId() %>">
+                                            <input class="form-control mr-sm-2" type="text" name="id" value="<%= administradorAlter.getId() %>" readonly="readonly">
                                         </div>
                                         <div class="form-group col-md-10">
                                             <label for="inputName">Nome Completo</label>
-                                            <input type="text" name="nome" class="form-control" id="inputName" value="<%= adminAlter.getNome() %>">
+                                            <input type="text" name="nome" class="form-control" id="inputName" value="<%= administradorAlter.getNome() %>">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputUsername">Nome de Usuário</label>
-                                            <input type="text" name="login" class="form-control" id="inputUsername" value="<%= adminAlter.getLogin() %>">
+                                            <input type="text" name="login" class="form-control" id="inputUsername" value="<%= administradorAlter.getLogin() %>">
                                         </div>
                                         <div class="form-group col-md-6">
                                                 <label for="inputEmail">Email</label>
-                                                <input type="text" name="email" class="form-control" id="inputEmail" value="<%= adminAlter.getEmail() %>">
+                                                <input type="text" name="email" class="form-control" id="inputEmail" value="<%= administradorAlter.getEmail() %>">
                                             </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputPassword">Senha</label>
-                                            <input type="password" name="senha" class="form-control" id="inputPassword" value="<%= adminAlter.getSenha() %>">
+                                            <input type="password" name="senha" class="form-control" id="inputPassword" value="<%= administradorAlter.getSenha() %>">
                                         </div>                                               
                                     </div> 
                                     <button type="submit" class="btn dark mt-3 mb-5 sm-0" style="background-color: #E97568">Atualizar Administrador</button>
                                 </form>
+                                <div class="form-group danger-zone col-md-6">
+                                    <h3>Zona Perigosa!!</h3>
+                                    <a class="btn dark sm-0" style="background-color: #E97568" href="DeletarAdministrador?id=<%= administradorAlter.getId() %>">Excluir minha conta</a>
+                                </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
             <%
@@ -76,4 +80,13 @@
             %>
         </div>
     </body>
+    <style>
+        .danger-zone {
+            color: #E97568;
+            background-color: #e3c4c1;
+            border: solid 2px;
+            border-radius: 3px;
+            padding: 10px;
+        }
+    </style>
 </html>

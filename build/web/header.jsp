@@ -78,7 +78,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Olá, <%= administrador.getNome()%></a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="alterAdmin.jsp">Minha conta</a>
+                            <a class="dropdown-item" href="MostrarAdministradorServlet?id=<%= administrador.getId() %>">Minha conta</a>
                         </div>
                     </li>                
                     <li class="nav-item">

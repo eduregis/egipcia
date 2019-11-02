@@ -48,6 +48,6 @@ public class DeletarAdministradorServlet extends HttpServlet {
         }
         // Saída
         /* Despacha a requisição atual para a página inicial */
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("Logout").forward(request, response);
     }
 }

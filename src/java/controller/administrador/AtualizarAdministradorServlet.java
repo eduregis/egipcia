@@ -52,6 +52,6 @@ public class AtualizarAdministradorServlet extends HttpServlet {
         }
         // Saída
         /* Despacha a requisição atual para a página principal */
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("InicioServlet").forward(request, response);
     }
 }
