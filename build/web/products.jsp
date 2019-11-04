@@ -50,7 +50,7 @@
                                     <label for="inputCategories">Categorias</label>
                                     <input type="hidden" id="inputCategorias" name="categorias" value="<%= (request.getAttribute("categorias") != null && request.getAttribute("categorias").toString().trim().length() > 0 ? request.getAttribute("categorias").toString().trim() : "")%>" />
                                 </div>
-                                <div class="form-row rounded p-2" style="border: solid 1px"> 
+                                <div class="form-row"> 
                                     <div class="form-group col-md-8">
                                         <select id="selectCategoria" class="form-control">
                                             <option value="">Selecione...</option>
@@ -64,10 +64,13 @@
                                                 }
                                             %>
                                         </select>
-                                        <input type="button" value="Adicionar Categoria" onclick="adicionarCategoria();" />
-                                        <div id="listCategorias"></div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <input class="btn dark" type="button" value="Adicionar Categoria" style="background-color: #E97568" onclick="adicionarCategoria();" />
                                     </div>
                                 </div>
+                                <div  class="form-row" id="listCategorias"></div>
+                                <hr>
                                 <button type="submit" class="btn dark mt-3 mb-5 sm-0" style="background-color: #E97568">Cadastrar</button>
                             </form>
                         </div>                            
@@ -93,11 +96,10 @@
                                         <th scope="col">id</th>
                                         <th scope="col">Nome do Produto</th>
                                         <th scope="col">Descrição</th>
-                                        <th scope="col">Categoria(s)</th>
                                         <th scope="col">Quantidade</th>
                                         <th scope="col">Preço unitário</th>
                                         <th scope="col">Foto</th>
-                                        <th scope="col">&nbsp;</th>
+                                        <th width="100px" scope="col">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -109,7 +111,6 @@
                                        
                                         <td><%= p.getNome()%></td>
                                         <td><%= p.getDescricao()%></td>
-                                        <td></td>
                                         <td><%= p.getQuantidade()%></td>
                                         <td><%= p.getPreco()%></td>
                                         <td>

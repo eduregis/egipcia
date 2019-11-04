@@ -58,28 +58,22 @@ function atualizarListaCategorias() {
     listCategorias.innerHTML = "";
     if (selectedCategorias.length > 0) {
         var html = "";
-        html += "<table>";
-        html += "<thead>";
-        html += "<tr>";
-        html += "<th>Id</th>";
-        html += "<th>Descricao</th>";
-        html += "<th>&nbsp;</th>";
-        html += "</tr>";
-        html += "</thead>";
-        html += "<tbody>";
+        html += "<div width=\"300px;\">";
         for (var i = 0; i < selectedCategorias.length; i++) {
             var c = selectedCategorias[i];
-            html += "<tr>";
-            html += "<td>" + c.id + "</td>";
-            html += "<td>" + c.descricao + "</td>";
-            html += "<td><input type=\"button\" onclick=\"removerCategoria(" + c.id + ");\" value=\"Remover\" /></td>";
-            html += "</tr>";
+            html += "<span class=\"btn btn-info mr-3\">";
+            html += "<span>";
+            html += c.descricao
+            html += "</span>";
+            html += "<span class=\"ml-2\" onclick=\"removerCategoria(" + c.id + ");\">";
+            html += "<img src=\"assets/delete.png\" width=\"20px;\">"
+            html += "</span>";
+            html += "</span>";
             inputCategorias.value += c.id;
             if (i < selectedCategorias.length - 1)
                 inputCategorias.value += ";";
-        }
-        html += "</tbody>";
-        html += "</table>";
+            }
+        html += "</div>";
         listCategorias.innerHTML = html;
     }
 }
