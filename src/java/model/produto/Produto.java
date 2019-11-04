@@ -5,6 +5,10 @@
  */
 package model.produto;
 
+import java.util.ArrayList;
+import java.util.List;
+import model.categoria.Categoria;
+
 /**
  *
  * @author Luís Eduardo
@@ -19,6 +23,22 @@ public class Produto {
     private double preco;
     private String foto;
     private int quantidade;
+    private List<Categoria> categorias;
+
+    public Produto() {
+        categorias = new ArrayList<Categoria>();
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
+    
+    
+    
     
     public int getId() {
         return id;

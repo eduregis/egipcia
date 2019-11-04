@@ -6,11 +6,13 @@
 package controller.produto;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.categoria.Categoria;
+import model.categoria.CategoriaModel;
 import model.produto.Produto;
 import model.produto.ProdutoModel;
 
@@ -40,6 +42,13 @@ public class MostrarProdutoServlet extends HttpServlet {
         Produto produto = produtoModel.listar(id);
         /* Grava o produo cadastrado no objeto que representa à requisição */
         request.setAttribute("produto",produto);
+        
+                CategoriaModel categoriaModel = new CategoriaModel();
+        /* Executa o método listar que gera uma lista com todas as categorias cadastradas */
+        List<Categoria> categoriasList = categoriaModel.listar();
+        /* Grava a lista com todas as categorias cadastradas no objeto que representa a requisição */
+        request.setAttribute("categoriasList", categoriasList);
+
         // Saída
         /* Despacha a requisição atual para o página de atualização do produto escolhido e mensagem gerada nesse servlet */
         request.getRequestDispatcher("alterProduct.jsp").forward(request, response);

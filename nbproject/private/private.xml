@@ -3,21 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/web/header.jsp</file>
-            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/src/java/controller/cliente/CadastrarClienteServlet.java</file>
-            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/web/alterProduct.jsp</file>
-            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/web/WEB-INF/web.xml</file>
             <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/web/products.jsp</file>
-            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/src/java/controller/administrador/MostrarAdministradorServlet.java</file>
-            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/web/clients.jsp</file>
-            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/src/java/model/administrador/AdministradorModel.java</file>
-            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/src/java/model/produto/ProdutoModel.java</file>
-            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/web/alterClient.jsp</file>
-            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/web/index.jsp</file>
-            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/web/alterAdmin.jsp</file>
-            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/src/java/model/produto/ProdutoDAO.java</file>
-            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/src/java/controller/produto/CadastrarProdutoServlet.java</file>
-            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/src/java/controller/cliente/MostrarClienteServlet.java</file>
         </group>
     </open-files>
 </project-private>

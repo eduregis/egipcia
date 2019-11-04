@@ -80,7 +80,34 @@
                                     <div class="form-group">
                                         <label for="inputImage">Imagem</label>
                                         <input type="text" name="imagem" class="form-control" id="inputImage" value="<%= produto.getFoto() %>">
-                                    </div> 
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <%
+                                        String categoriasCadastradas = "";
+                                        List<Categoria> produtoCategorias = produto.getCategorias();
+                                        for (int i = 0; produtoCategorias != null && i < produtoCategorias.size(); i++) {
+                                            categoriasCadastradas += produtoCategorias.get(i).getId();
+                                            if (i < produtoCategorias.size() - 1) {
+                                                categoriasCadastradas += ";";
+                                            }
+                                        }
+                                        %>
+                                        <input type="hidden" id="inputCategorias" name="categorias" value="<%= categoriasCadastradas %>" />
+                                        <select id="selectCategoria" class="form-control">
+                                            <option value="">Selecione...</option>
+                                            <%
+                                                List<Categoria> categoriasList = (List<Categoria>) request.getAttribute("categoriasList");
+                                                for (int i = 0; categoriasList != null && i < categoriasList.size(); i++){
+                                                    Categoria c = categoriasList.get(i);
+                                            %>
+                                            <option value="<%= c.getId()%>"><%= c.getDescricao()%></option>
+                                            <% 
+                                                }
+                                            %>
+                                        </select>
+                                        <input type="button" value="Adicionar Categoria" onclick="adicionarCategoria();" />
+                                        <div id="listCategorias"></div>
+                                    </div>   
                                     <button type="submit" class="btn dark mt-3 mb-5 sm-0" style="background-color: #E97568">Atualizar Produto</button>
                                 </form>
                             </div>
@@ -118,4 +145,5 @@
             filter: alpha(opacity=0);
         }
     </style>
+    <script type="text/javascript" src="js/produto.js"></script>
 </html>

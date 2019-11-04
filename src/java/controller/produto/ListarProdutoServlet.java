@@ -44,9 +44,9 @@ public class ListarProdutoServlet extends HttpServlet {
         /* Instancia a classe de negócio que trata a requisição deste controle */
         CategoriaModel categoriaModel = new CategoriaModel();
         /* Executa o método listar que gera uma lista com todas as categorias cadastradas */
-        List<Categoria> categorias = categoriaModel.listar();
+        List<Categoria> categoriasList = categoriaModel.listar();
         /* Grava a lista com todas as categorias cadastradas no objeto que representa a requisição */
-        request.setAttribute("categorias", categorias);
+        request.setAttribute("categoriasList", categoriasList);
         // saída
         /* Despacha a requisição atual para a página products.jsp no intuito de mostrar todas os produtos recuperadas e gravadas na requisição */
         request.getRequestDispatcher("products.jsp").forward(request, response);

@@ -21,7 +21,6 @@
                 <hr>
                 <div>                    
                     <button class="btn dropdown-toggle dark my-sm-0" type="button" style="background-color: #E97568" data-toggle="collapse" data-target="#createClientDiv" aria-expanded="false" aria-controls="multiCollapseExample2">Cadastrar produto</button>
-                    <hr>
                 </div>
             </div>            
             <div class="row pb-3"> 
@@ -49,27 +48,24 @@
                                 </div>  
                                 <div class="form-row">
                                     <label for="inputCategories">Categorias</label>
+                                    <input type="hidden" id="inputCategorias" name="categorias" value="<%= (request.getAttribute("categorias") != null && request.getAttribute("categorias").toString().trim().length() > 0 ? request.getAttribute("categorias").toString().trim() : "")%>" />
                                 </div>
                                 <div class="form-row rounded p-2" style="border: solid 1px"> 
                                     <div class="form-group col-md-8">
-                                        <select id="inputCategories" class="form-control">
+                                        <select id="selectCategoria" class="form-control">
+                                            <option value="">Selecione...</option>
                                             <%
-                                            /* Recupera da requisição um objeto que representa uma lista de categorias */
-                                            List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");
-                                            /* Se o objeto que representa lsta de categorias for diferentes de nulo e não for uma lista vazia */
-                                            if (categorias != null && categorias.size() > 0){
-                                                /* Exibir a lista de categorias como itens do select */
-                                                for (Categoria c: categorias) {
+                                                List<Categoria> categoriasList = (List<Categoria>) request.getAttribute("categoriasList");
+                                                for (int i = 0; categoriasList != null && i < categoriasList.size(); i++){
+                                                    Categoria c = categoriasList.get(i);
                                             %>
-                                            <option><%= c.getDescricao() %></option>
-                                            <%
+                                            <option value="<%= c.getId()%>"><%= c.getDescricao()%></option>
+                                            <% 
                                                 }
-                                            }
                                             %>
                                         </select>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <button class="btn dark sm-0" style="background-color: #E97568" onclick="adicionarCategoriaNoProduto()">Adicionar Categoria</button>
+                                        <input type="button" value="Adicionar Categoria" onclick="adicionarCategoria();" />
+                                        <div id="listCategorias"></div>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn dark mt-3 mb-5 sm-0" style="background-color: #E97568">Cadastrar</button>
@@ -78,6 +74,7 @@
                     </div>
                 </div>
             </div>
+            <hr>
             <div class="row pb-3">              
                 <div id="listClientDiv">
                     <div class="row pb-3">
@@ -150,4 +147,5 @@
             </div>
         </div>
     </body>
+    <script type="text/javascript" src="js/produto.js"></script>                                     
 </html>

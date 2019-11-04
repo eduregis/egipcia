@@ -6,6 +6,7 @@
 package model.produto;
 
 import java.util.List;
+import model.categoria.Categoria;
 
 /**
  *
@@ -13,9 +14,9 @@ import java.util.List;
  */
 public class ProdutoModel {
 
-    public boolean inserir(String nome, String descricao, int quantidade, double preco) {
+    public boolean inserir(String nome, String descricao, int quantidade, double preco, List<Categoria> categorias) {
         ProdutoDAO dao = new ProdutoDAO();
-        return dao.inserir(nome, descricao, quantidade, preco);
+        return dao.inserir(nome, descricao, quantidade, preco, categorias);
     }
     
     public List<Produto> listar() {
@@ -33,12 +34,12 @@ public class ProdutoModel {
         return dao.alterarFoto(id, foto);
     }
     
-    public boolean atualizar(int id, String nome, String descricao, int qtd, double preco, String imagem){
+    public boolean atualizar(int id, String nome, String descricao, int qtd, double preco, String imagem, List<Categoria> categorias){
         if (id > 0 && nome != null && nome.trim().length() > 0
                 && descricao != null && descricao.trim().length() > 0
                 && imagem != null && imagem.trim().length() > 0){
             ProdutoDAO produtoDAO = new ProdutoDAO();
-            return produtoDAO.alterar(id, nome, descricao, qtd, preco);
+            return produtoDAO.alterar(id, nome, descricao, qtd, preco, categorias);
         } else {
             return false;
         }
