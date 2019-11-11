@@ -104,6 +104,14 @@
         <servlet-name>InicioServlet</servlet-name>
         <servlet-class>config.InicioServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdicionarProdutoCarrinhoCompraServlet</servlet-name>
+        <servlet-class>controller.carrinhocompra.AdicionarProdutoCarrinhoCompraServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoverProdutoCarrinhoCompraServlet</servlet-name>
+        <servlet-class>controller.carrinhocompra.RemoverProdutoCarrinhoCompraServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -207,6 +215,14 @@
     <servlet-mapping>
         <servlet-name>InicioServlet</servlet-name>
         <url-pattern>/InicioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdicionarProdutoCarrinhoCompraServlet</servlet-name>
+        <url-pattern>/AdicionarProdutoCarrinhoCompraServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoverProdutoCarrinhoCompraServlet</servlet-name>
+        <url-pattern>/RemoverProdutoCarrinhoCompraServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

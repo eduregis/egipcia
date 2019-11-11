@@ -46,6 +46,7 @@ public class CadastrarClienteServlet extends HttpServlet {
         Administrador admin = (Administrador)session.getAttribute("administrador");
         if(admin != null) {
             /* Direciona para o servlet de listar clientes, para atualizar a lista exibida com o valor novo inserido */
+            request.setAttribute("mensagem", "O cliente foi cadastrado!");
             request.getRequestDispatcher("ListarCliente").forward(request, response);
             // request.getRequestDispatcher("clients.jsp").forward(request, response);
         } else {

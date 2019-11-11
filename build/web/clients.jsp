@@ -1,5 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="model.cliente.Cliente"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
     <head>
@@ -13,6 +14,14 @@
     </head>
     <body style="background-color: #F4E19F">
         <%@include file="header.jsp"%>    
+        <%
+            String mensagem = (String) request.getAttribute("mensagem");
+            if (mensagem != null && mensagem.length() > 0) {
+        %>
+        <div class="container" style="color: #E97568"><%=mensagem%></div> 
+        <%
+            }
+        %>
         <div class="container rounded mb-5" style="background-color: #F7EFE2">
             <div class="mt-3 ml-3 py-3">
                 <h1 style="color: #58889C">Clientes</h1>

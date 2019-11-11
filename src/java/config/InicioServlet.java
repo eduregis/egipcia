@@ -12,6 +12,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.carrinhocompra.CarrinhoCompraItem;
+import model.carrinhocompra.CarrinhoCompraModel;
+import model.cookie.CookieUtils;
 import model.produto.Produto;
 import model.produto.ProdutoModel;
 /**
@@ -38,6 +41,21 @@ public class InicioServlet extends HttpServlet {
         List<Produto> produtos = produtoModel.listar();
         /* Grava a lista com todos os produtos cadastrados no objeto que representa a requisição */
         request.setAttribute("produtos", produtos);
+        
+        Cookie c = CookieUtils.obterCookie(request); // obtém o cookie da aplicação, caso exista
+        
+        if (c == null) {
+            // se o cookie não existir, cria-o vazio
+            c = new Cookie(CookieUtils.COOKIE_KEY, null);
+            c.setValue("");
+        } else {
+            // caso o cookie já exista, resgata o carrinho de compras armazenado dentro do valor do cookie
+            List<CarrinhoCompraItem> carrinhoCompra = CarrinhoCompraModel.obterCarrinhoCompra(c.getValue());
+            request.setAttribute("carrinhoCompra", carrinhoCompra);
+            
+        }
+        c.setMaxAge(Integer.MAX_VALUE); // atualiza a idade do cookie para o máximo do valor inteiro
+        response.addCookie(c); // salva o cookie no navegador do cliente
         
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }

@@ -48,10 +48,10 @@
                     <div class="card-body">
                         <h5 class="card-title"><%= p.getNome()%></h5>
                         <p class="card-text"><%= p.getPreco()%></p>                            
-                        <p class="card-text">Descrição: <%= p.getDescricao()%></p>
+                        <p class="card-text card-text-desc">Descrição: <%= p.getDescricao()%></p>
                         <p class="card-text">Quantidade no estoque: <span style="color: #51aa3a"><%= p.getQuantidade() %></span></p>
                         <!-- <h6>Tags: <span class="badge badge-secondary">Tag1</span> <span class="badge badge-secondary">Tag2</span></h6> -->
-                        <button class="btn dark my-2" type="submit" style="background-color: #E97568">Adicionar ao carrinho</button>
+                        <button onclick="document.location = 'AdicionarProdutoCarrinhoCompraServlet?produtoId=<%= p.getId() %>&quantidade=1';" class="btn dark my-2" type="submit" style="background-color: #E97568">Adicionar ao carrinho</button>
                     </div>                              
                 </div>
             </div> 
@@ -65,6 +65,9 @@
     </div>
 </body>
 <style>
+    .card-text-desc{
+        height: 81px;
+    }
     .img-product-container{
         display: flex;
         justify-content: center;

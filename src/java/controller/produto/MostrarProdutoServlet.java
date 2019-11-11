@@ -43,7 +43,7 @@ public class MostrarProdutoServlet extends HttpServlet {
         /* Grava o produo cadastrado no objeto que representa à requisição */
         request.setAttribute("produto",produto);
         
-                CategoriaModel categoriaModel = new CategoriaModel();
+        CategoriaModel categoriaModel = new CategoriaModel();
         /* Executa o método listar que gera uma lista com todas as categorias cadastradas */
         List<Categoria> categoriasList = categoriaModel.listar();
         /* Grava a lista com todas as categorias cadastradas no objeto que representa a requisição */
