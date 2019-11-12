@@ -14,15 +14,7 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>        
 </head>
 <body style="background-color: #F4E19F">
-    <%@include file="header.jsp"%>    
-    <%
-        String mensagem = (String) request.getAttribute("mensagem");
-        if (mensagem != null && mensagem.length() > 0) {
-    %>
-    <div class="container" style="color: #E97568"><%=mensagem%></div> 
-    <%
-        }
-    %>
+    <%@include file="header.jsp"%>   
     <div class="container rounded mb-5" style="background-color: #F7EFE2">
         <div class="mt-3 ml-3 py-3">
             <h1 style="color: #58889C">No estoque!</h1>
