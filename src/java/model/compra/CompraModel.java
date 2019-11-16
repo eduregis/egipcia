@@ -25,9 +25,9 @@ public class CompraModel {
         return compraDAO.listarCompras();
     }
     
-    public Compra listar(int id) {
+    public List<Compra> listar(int id) {
         CompraDAO compraDAO = new CompraDAO();
-        return compraDAO.listarCompra(id);
+        return compraDAO.listarCompras(id);
     }
     
     public Compra listar(int id, Timestamp data_compra) {

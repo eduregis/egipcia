@@ -5,6 +5,8 @@
  */
 package model.compraProduto;
 
+import java.util.List;
+
 /**
  *
  * @author Luís Eduardo
@@ -16,4 +18,8 @@ public class CompraProdutoModel {
         return dao.inserir(compra_id, produto_id, quantidade);
     }
     
+    public List<CompraProduto> listar(int id) {
+        CompraProdutoDAO compraProdutoDAO = new CompraProdutoDAO();
+        return compraProdutoDAO.listarCompraProdutoPorCompra_id(id);
+    }
 }

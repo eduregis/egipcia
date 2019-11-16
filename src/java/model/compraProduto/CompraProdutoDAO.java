@@ -61,8 +61,8 @@ public class CompraProdutoDAO {
      * @param compra_id
      * @return
      */
-    public CompraProduto listarCompraProdutoPorCompra_id(int compra_id) {
-        CompraProduto compraProduto = null;
+    public List<CompraProduto> listarCompraProdutoPorCompra_id(int compra_id) {
+        List<CompraProduto> resultado = new ArrayList<CompraProduto>();
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
@@ -70,18 +70,20 @@ public class CompraProdutoDAO {
             preparedStatement.setInt(1, compra_id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                compraProduto = new CompraProduto();
+                CompraProduto compraProduto = new CompraProduto();
                 compraProduto.setCompra_id(resultSet.getInt("compra_id"));
                 compraProduto.setProduto_id(resultSet.getInt("produto_id"));
                 compraProduto.setQuantidade(resultSet.getInt("qtd"));
+                resultado.add(compraProduto);
             }
             resultSet.close();
             preparedStatement.close();
             connection.close();
         } catch (Exception ex) {
-            return null;
+            ex.printStackTrace();
+            return new ArrayList<CompraProduto>();
         }
-        return compraProduto;
+        return resultado;
     }
     
     /**

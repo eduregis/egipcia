@@ -116,6 +116,10 @@
         <servlet-name>CadastrarCompraServlet</servlet-name>
         <servlet-class>controller.compra.CadastrarCompraServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListarCompraServlet</servlet-name>
+        <servlet-class>controller.compra.ListarCompraServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -231,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>CadastrarCompraServlet</servlet-name>
         <url-pattern>/CadastrarCompraServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListarCompraServlet</servlet-name>
+        <url-pattern>/ListarCompraServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

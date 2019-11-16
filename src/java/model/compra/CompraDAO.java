@@ -45,13 +45,44 @@ public class CompraDAO {
                 Compra compra = new Compra();
                 compra.setId(resultSet.getInt("id"));
                 compra.setCliente_id(resultSet.getInt("cliente_id"));
-                compra.setData(resultSet.getTimestamp("data"));
+                compra.setData(resultSet.getTimestamp("data_compra"));
                 resultado.add(compra);
             }
             resultSet.close();
             statement.close();
             connection.close();
         } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<Compra>();
+        }
+        return resultado;
+    }
+    
+    /**
+     * Método utilizado para listar todos as compras registradas
+     *
+     * @return
+     */
+    public List<Compra> listarCompras(int id) {
+        List<Compra> resultado = new ArrayList<Compra>();
+        try {
+            Class.forName(JDBC_DRIVER);
+            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            PreparedStatement preparedStatement = connection.prepareCall("SELECT id, cliente_id, data_compra FROM compras WHERE cliente_id = ?");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Compra compra = new Compra();
+                compra.setId(resultSet.getInt("id"));
+                compra.setCliente_id(resultSet.getInt("cliente_id"));
+                compra.setData(resultSet.getTimestamp("data_compra"));
+                resultado.add(compra);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
             return new ArrayList<Compra>();
         }
         return resultado;

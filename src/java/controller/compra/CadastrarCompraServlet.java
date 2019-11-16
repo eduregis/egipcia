@@ -50,16 +50,21 @@ public class CadastrarCompraServlet extends HttpServlet {
             Cookie ck = CookieUtils.obterCookie(request);
             if (ck != null) {
                 CompraModel compraModel = new CompraModel();
+                // Pega a data atual para fazer a compra
                 Timestamp dataCompra = new Timestamp(System.currentTimeMillis());
-                compraModel.inserir(c.getId(), dataCompra);  
+                // Inserindo tupla que representa a compra
+                compraModel.inserir(c.getId(), dataCompra);
+                // IMPORTANTE!!!
+                // Tentando pegar o id da compra recém criada, nas linhas acima
                 Compra compra = compraModel.listar(c.getId(), dataCompra);
-                System.out.println(compra);
                 List<CarrinhoCompraItem> carrinhoCompra = CarrinhoCompraModel.obterCarrinhoCompra(ck.getValue());
                 for (int i = 0; i < carrinhoCompra.size(); i++) {
                     CarrinhoCompraItem cci = carrinhoCompra.get(i);
                     CompraProdutoModel compraProdutoModel = new CompraProdutoModel();
-                    compraProdutoModel.inserir(compra.getId(), cci.getProduto().getId(), cci.getQuantidade());
-                
+                    // a linha abaixo deve ser o código final
+                    // compraProdutoModel.inserir(compra.getId(), cci.getProduto().getId(), cci.getQuantidade());
+                    // substituto temporário
+                    compraProdutoModel.inserir(1, cci.getProduto().getId(), cci.getQuantidade());
                 }
                 request.setAttribute("mensagem", "A compra foi realizada com sucesso!");
                 request.getRequestDispatcher("InicioServlet").forward(request, response);                
