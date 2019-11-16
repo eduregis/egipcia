@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/src/java/model/compraProduto/CompraProdutoModel.java</file>
+            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/web/cart.jsp</file>
+            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/src/java/model/compra/CompraModel.java</file>
+            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/src/java/model/cliente/ClienteModel.java</file>
+            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/src/java/model/compraProduto/CompraProdutoDAO.java</file>
             <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/web/products.jsp</file>
+            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/src/java/controller/compra/CadastrarCompraServlet.java</file>
+            <file>file:/home/eduardo/NetBeansProjects/EgipciaEcommerce/src/java/model/compra/CompraDAO.java</file>
         </group>
     </open-files>
 </project-private>

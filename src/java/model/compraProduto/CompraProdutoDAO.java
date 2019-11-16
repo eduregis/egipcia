@@ -38,12 +38,12 @@ public class CompraProdutoDAO {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT compra_id, produto_id, quantidade FROM compraProdutos");
+            ResultSet resultSet = statement.executeQuery("SELECT compra_id, produto_id, qtd FROM compras_produtos");
             while (resultSet.next()) {
                 CompraProduto compraProduto = new CompraProduto();
                 compraProduto.setCompra_id(resultSet.getInt("compra_id"));
                 compraProduto.setProduto_id(resultSet.getInt("produto_id"));
-                compraProduto.setQuantidade(resultSet.getInt("quantidade"));
+                compraProduto.setQuantidade(resultSet.getInt("qtd"));
                 resultado.add(compraProduto);
             }
             resultSet.close();
@@ -66,14 +66,14 @@ public class CompraProdutoDAO {
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareCall("SELECT compra_id, produto_id, quantidade FROM compraProdutos WHERE compra_id = ?");
+            PreparedStatement preparedStatement = connection.prepareCall("SELECT compra_id, produto_id, qtd FROM compras_produtos WHERE compra_id = ?");
             preparedStatement.setInt(1, compra_id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 compraProduto = new CompraProduto();
                 compraProduto.setCompra_id(resultSet.getInt("compra_id"));
                 compraProduto.setProduto_id(resultSet.getInt("produto_id"));
-                compraProduto.setQuantidade(resultSet.getInt("quantidade"));
+                compraProduto.setQuantidade(resultSet.getInt("qtd"));
             }
             resultSet.close();
             preparedStatement.close();
@@ -95,14 +95,14 @@ public class CompraProdutoDAO {
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareCall("SELECT compra_id, produto_id, quantidade FROM compraProdutos WHERE produto_id = ?");
+            PreparedStatement preparedStatement = connection.prepareCall("SELECT compra_id, produto_id, qtd FROM compras_produtos WHERE produto_id = ?");
             preparedStatement.setInt(1, produto_id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 compraProduto = new CompraProduto();
                 compraProduto.setCompra_id(resultSet.getInt("compra_id"));
                 compraProduto.setProduto_id(resultSet.getInt("produto_id"));
-                compraProduto.setQuantidade(resultSet.getInt("quantidade"));
+                compraProduto.setQuantidade(resultSet.getInt("qtd"));
             }
             resultSet.close();
             preparedStatement.close();
@@ -118,18 +118,18 @@ public class CompraProdutoDAO {
      *
      * @param compra_id
      * @param produto_id
-     * @param quantidade
+     * @param qtd
      * @return
      */
-    public boolean inserir(int compra_id, int produto_id, int quantidade) {
+    public boolean inserir(int compra_id, int produto_id, int qtd) {
         boolean resultado = false;
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO compraProdutos (compra_id, produto_id, quantidade) VALUES (?, ?, ?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO compras_produtos (compra_id, produto_id, qtd) VALUES (?, ?, ?)");
             preparedStatement.setInt(1, compra_id);
             preparedStatement.setInt(2, produto_id);
-            preparedStatement.setInt(3, quantidade);
+            preparedStatement.setInt(3, qtd);
             resultado = (preparedStatement.executeUpdate() > 0);
             preparedStatement.close();
             connection.close();
@@ -148,13 +148,13 @@ public class CompraProdutoDAO {
      * @param data
      * @return
      */
-    public boolean alterar(int compra_id, int produto_id, int quantidade) {
+    public boolean alterar(int compra_id, int produto_id, int qtd) {
         boolean resultado = false;
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE compraProdutos SET quantidade = ? WHERE compra_id = ? AND produto_id = ?");
-            preparedStatement.setInt(1, quantidade);
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE compras_produtos SET qtd = ? WHERE compra_id = ? AND produto_id = ?");
+            preparedStatement.setInt(1, qtd);
             preparedStatement.setInt(2, compra_id);
             preparedStatement.setInt(3, produto_id);
             resultado = (preparedStatement.executeUpdate() > 0);
@@ -177,7 +177,7 @@ public class CompraProdutoDAO {
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM compraProdutos WHERE compra_id = ? AND produto_id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM compras_produtos WHERE compra_id = ? AND produto_id = ?");
             preparedStatement.setInt(1, compra_id);
             preparedStatement.setInt(2, produto_id);
             resultado = (preparedStatement.executeUpdate() > 0);

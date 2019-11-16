@@ -85,7 +85,35 @@ public class CompraDAO {
         }
         return compra;
     }
-
+    /**
+     * Método utilizado para listar uma compra pelo id e pela data
+     *
+     * @param id
+     * @return
+     */
+    public Compra listarCompra(int id, Timestamp data_compra) {
+        Compra compra = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            PreparedStatement preparedStatement = connection.prepareCall("SELECT id, cliente_id, data_compra FROM compras WHERE id = ? AND data_compra = ?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.setTimestamp(2, data_compra);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                compra = new Compra();
+                compra.setId(resultSet.getInt("id"));
+                compra.setCliente_id(resultSet.getInt("cliente_id"));
+                compra.setData(resultSet.getTimestamp("data_compra"));              
+            }
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception ex) {
+            return null;
+        }
+        return compra;
+    }
     /**
      * Método utilizado para inserir uma nova compra
      *

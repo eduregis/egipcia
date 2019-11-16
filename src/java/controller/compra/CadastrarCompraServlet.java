@@ -20,6 +20,7 @@ import model.administrador.Administrador;
 import model.carrinhocompra.CarrinhoCompraItem;
 import model.cliente.Cliente;
 import model.cliente.ClienteModel;
+import model.compra.Compra;
 import model.compra.CompraModel;
 import model.compraProduto.CompraProdutoModel;
 
@@ -50,12 +51,14 @@ public class CadastrarCompraServlet extends HttpServlet {
             if (ck != null) {
                 CompraModel compraModel = new CompraModel();
                 Timestamp dataCompra = new Timestamp(System.currentTimeMillis());
-                compraModel.inserir(c.getId(), dataCompra);        
+                compraModel.inserir(c.getId(), dataCompra);  
+                Compra compra = compraModel.listar(c.getId(), dataCompra);
+                System.out.println(compra);
                 List<CarrinhoCompraItem> carrinhoCompra = CarrinhoCompraModel.obterCarrinhoCompra(ck.getValue());
                 for (int i = 0; i < carrinhoCompra.size(); i++) {
                     CarrinhoCompraItem cci = carrinhoCompra.get(i);
                     CompraProdutoModel compraProdutoModel = new CompraProdutoModel();
-                    
+                    compraProdutoModel.inserir(compra.getId(), cci.getProduto().getId(), cci.getQuantidade());
                 
                 }
                 request.setAttribute("mensagem", "A compra foi realizada com sucesso!");
