@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,12 +40,12 @@ public class CompraDAO {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT id, cliente_id, data FROM compras");
+            ResultSet resultSet = statement.executeQuery("SELECT id, cliente_id, data_compra FROM compras");
             while (resultSet.next()) {
                 Compra compra = new Compra();
                 compra.setId(resultSet.getInt("id"));
                 compra.setCliente_id(resultSet.getInt("cliente_id"));
-                compra.setData(resultSet.getDate("data"));
+                compra.setData(resultSet.getTimestamp("data"));
                 resultado.add(compra);
             }
             resultSet.close();
@@ -67,14 +68,14 @@ public class CompraDAO {
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareCall("SELECT id, cliente_id, data FROM compras WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareCall("SELECT id, cliente_id, data_compra FROM compras WHERE id = ?");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 compra = new Compra();
                 compra.setId(resultSet.getInt("id"));
                 compra.setCliente_id(resultSet.getInt("cliente_id"));
-                compra.setData(resultSet.getDate("data"));              
+                compra.setData(resultSet.getTimestamp("data"));              
             }
             resultSet.close();
             preparedStatement.close();
@@ -92,14 +93,14 @@ public class CompraDAO {
      * @param data
      * @return
      */
-    public boolean inserir(int cliente_id, Date data) {
+    public boolean inserir(int cliente_id, Timestamp data) {
         boolean resultado = false;
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO compras (cliente_id, data) VALUES (?, ?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO compras (cliente_id, data_compra) VALUES (?, ?)");
             preparedStatement.setInt(1, cliente_id);
-            preparedStatement.setDate(2, data);
+            preparedStatement.setTimestamp(2, data);
             resultado = (preparedStatement.executeUpdate() > 0);
             preparedStatement.close();
             connection.close();
@@ -123,7 +124,7 @@ public class CompraDAO {
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE compras SET cliente_id = ?, data = ? WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE compras SET cliente_id = ?, data_compra = ? WHERE id = ?");
             preparedStatement.setInt(1, cliente_id);
             preparedStatement.setDate(2, data);
             preparedStatement.setInt(3, id);

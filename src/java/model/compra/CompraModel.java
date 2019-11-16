@@ -6,6 +6,7 @@
 package model.compra;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.sql.Date;
  */
 public class CompraModel {
 
-    public boolean inserir(int cliente_id, Date data) {
+    public boolean inserir(int cliente_id, Timestamp data) {
         CompraDAO dao = new CompraDAO();
         return dao.inserir(cliente_id, data);
     }

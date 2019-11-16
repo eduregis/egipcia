@@ -38,7 +38,7 @@ public class RemoverProdutoCarrinhoCompraServlet extends HttpServlet {
         Cookie c = CookieUtils.obterCookie(request);
         String novoValor = CarrinhoCompraModel.removerItem(produtoId, c.getValue());
         c.setValue(novoValor);
-        
+        response.addCookie(c);
         
         request.setAttribute("mensagem", "O produto foi removido do carrinho!");
 

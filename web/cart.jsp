@@ -31,7 +31,6 @@
                 double precoTotal = 0;
         if (c == null) {
             // caso o cookie já exista, resgata o carrinho de compras armazenado dentro do valor do cookie
-            
         } else {
             List<CarrinhoCompraItem> carrinhoCompra = CarrinhoCompraModel.obterCarrinhoCompra(c.getValue());
             for (int i = 0; i < carrinhoCompra.size(); i++) {
@@ -64,7 +63,7 @@
             String dx = df.format(precoTotal);
             %>                   
         </div>
-            <form class="ml-3 mt-3" style="color: #58889C">
+            <form action="CadastrarCompraServlet" method="post" class="ml-3 mt-3" style="color: #58889C">
                 <div class="form-row">
                     <h3>Preço total: R$ <%= dx %></h3>  
                 </div>                        

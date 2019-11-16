@@ -6,6 +6,7 @@
 package model.compra;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -17,7 +18,7 @@ public class Compra {
     
     private int id;
     private int cliente_id;
-    private Date data;
+    private Timestamp data;
     
     public int getId() {
         return id;
@@ -35,11 +36,11 @@ public class Compra {
         this.cliente_id = cliente_id;
     }
 
-    public Date getData() {
+    public Timestamp getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(Timestamp data) {
         this.data = data;
     }
 

@@ -112,6 +112,10 @@
         <servlet-name>RemoverProdutoCarrinhoCompraServlet</servlet-name>
         <servlet-class>controller.carrinhocompra.RemoverProdutoCarrinhoCompraServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CadastrarCompraServlet</servlet-name>
+        <servlet-class>controller.compra.CadastrarCompraServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -223,6 +227,10 @@
     <servlet-mapping>
         <servlet-name>RemoverProdutoCarrinhoCompraServlet</servlet-name>
         <url-pattern>/RemoverProdutoCarrinhoCompraServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarCompraServlet</servlet-name>
+        <url-pattern>/CadastrarCompraServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
