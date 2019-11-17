@@ -5,6 +5,8 @@
  */
 package model.produtoCategoria;
 
+import java.util.List;
+
 /**
  *
  * @author Luís Eduardo
@@ -16,4 +18,8 @@ public class ProdutoCategoriaModel {
         return dao.inserir(produto_id, categoria_id);
     }
     
+    public List<ProdutoCategoria> listar(int id) {
+        ProdutoCategoriaDAO produtoCategoriaDAO = new ProdutoCategoriaDAO();
+        return produtoCategoriaDAO.listarProdutoCategoriasPorProduto_id(id);
+    }
 }

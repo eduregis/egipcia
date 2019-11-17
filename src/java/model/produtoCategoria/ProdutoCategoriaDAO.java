@@ -60,26 +60,28 @@ public class ProdutoCategoriaDAO {
      * @param produto_id
      * @return
      */
-    public ProdutoCategoria listarProdutoCategoriaPorProduto_id(int produto_id) {
-        ProdutoCategoria produtoCategoria = null;
+    public List<ProdutoCategoria> listarProdutoCategoriasPorProduto_id(int produto_id) {
+        List<ProdutoCategoria> resultado = new ArrayList<ProdutoCategoria>();
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareCall("SELECT produto_id, categoria_id FROM produtoCategorias WHERE produto_id = ?");
+            PreparedStatement preparedStatement = connection.prepareCall("SELECT produto_id, categoria_id FROM produtos_categorias WHERE produto_id = ?");
             preparedStatement.setInt(1, produto_id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                produtoCategoria = new ProdutoCategoria();
+                ProdutoCategoria produtoCategoria = new ProdutoCategoria();
                 produtoCategoria.setProduto_id(resultSet.getInt("produto_id"));
                 produtoCategoria.setCategoria_id(resultSet.getInt("categoria_id"));
+                resultado.add(produtoCategoria);
             }
             resultSet.close();
             preparedStatement.close();
             connection.close();
         } catch (Exception ex) {
-            return null;
+            ex.printStackTrace();
+            return new ArrayList<ProdutoCategoria>();
         }
-        return produtoCategoria;
+        return resultado;
     }
     
     /**

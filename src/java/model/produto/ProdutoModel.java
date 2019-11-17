@@ -34,6 +34,17 @@ public class ProdutoModel {
         return dao.alterarFoto(id, foto);
     }
     
+    public boolean atualizarEstoque(int id, int quantidade){
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        Produto produto = produtoDAO.listarProduto(id);
+        int newQtd = produto.getQuantidade() - quantidade;
+        if(id > 0 && quantidade > 0){
+            return produtoDAO.alterar(id, produto.getNome(), produto.getDescricao(), newQtd, produto.getPreco(), produto.getCategorias());
+        } else {
+            return false;
+        }
+    }
+    
     public boolean atualizar(int id, String nome, String descricao, int qtd, double preco, String imagem, List<Categoria> categorias){
         if (id > 0 && nome != null && nome.trim().length() > 0
                 && descricao != null && descricao.trim().length() > 0

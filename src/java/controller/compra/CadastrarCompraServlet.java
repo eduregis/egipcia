@@ -23,6 +23,7 @@ import model.cliente.ClienteModel;
 import model.compra.Compra;
 import model.compra.CompraModel;
 import model.compraProduto.CompraProdutoModel;
+import model.produto.ProdutoModel;
 
 /**
  *
@@ -58,14 +59,19 @@ public class CadastrarCompraServlet extends HttpServlet {
                 // Tentando pegar o id da compra recém criada, nas linhas acima
                 Compra compra = compraModel.listar(c.getId(), dataCompra);
                 List<CarrinhoCompraItem> carrinhoCompra = CarrinhoCompraModel.obterCarrinhoCompra(ck.getValue());
+                CompraProdutoModel compraProdutoModel = new CompraProdutoModel();
+                ProdutoModel produtoModel = new ProdutoModel();
                 for (int i = 0; i < carrinhoCompra.size(); i++) {
                     CarrinhoCompraItem cci = carrinhoCompra.get(i);
-                    CompraProdutoModel compraProdutoModel = new CompraProdutoModel();
                     // a linha abaixo deve ser o código final
                     // compraProdutoModel.inserir(compra.getId(), cci.getProduto().getId(), cci.getQuantidade());
                     // substituto temporário
+                    produtoModel.atualizarEstoque(cci.getProduto().getId(), cci.getQuantidade());
                     compraProdutoModel.inserir(1, cci.getProduto().getId(), cci.getQuantidade());
                 }
+                // limpa o cookie do carrinho de compras
+                ck.setValue("");
+                response.addCookie(ck);
                 request.setAttribute("mensagem", "A compra foi realizada com sucesso!");
                 request.getRequestDispatcher("InicioServlet").forward(request, response);                
             } else {

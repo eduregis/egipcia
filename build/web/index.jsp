@@ -1,3 +1,7 @@
+<%@page import="model.categoria.CategoriaModel"%>
+<%@page import="model.produto.ProdutoModel"%>
+<%@page import="model.produtoCategoria.ProdutoCategoria"%>
+<%@page import="model.produtoCategoria.ProdutoCategoriaModel"%>
 <%@page import="model.produto.Produto"%>
 <%@page import="java.util.List"%>
 <%@page import="model.administrador.Administrador"%>
@@ -42,6 +46,18 @@
                         <p class="card-text"><%= p.getPreco()%></p>                            
                         <p class="card-text card-text-desc">Descrição: <%= p.getDescricao()%></p>
                         <p class="card-text">Quantidade no estoque: <span style="color: #51aa3a"><%= p.getQuantidade() %></span></p>
+                        <h6>Tags: 
+                            <%
+                                ProdutoCategoriaModel produtoCategoriaModel = new ProdutoCategoriaModel();
+                                List<ProdutoCategoria> produtoCategorias = produtoCategoriaModel.listar(p.getId());
+                                for (ProdutoCategoria pc: produtoCategorias) {
+                                    CategoriaModel categoriaModel = new CategoriaModel();
+                            %>
+                            <span class="badge badge-secondary"><%=categoriaModel.listar(pc.getCategoria_id()).getDescricao() %></span>
+                            <%
+                            }
+                            %>
+                        </h6>
                         <!-- <h6>Tags: <span class="badge badge-secondary">Tag1</span> <span class="badge badge-secondary">Tag2</span></h6> -->
                         <button onclick="document.location = 'AdicionarProdutoCarrinhoCompraServlet?produtoId=<%= p.getId() %>&quantidade=1';" class="btn dark my-2" type="submit" style="background-color: #E97568">Adicionar ao carrinho</button>
                     </div>                              
