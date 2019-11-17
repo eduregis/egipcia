@@ -24,6 +24,11 @@ public class ProdutoModel {
         return produtoDAO.listarProdutos();
     }
     
+    public List<Produto> listarEstoque() {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        return produtoDAO.listarProdutosEstoque();
+    }
+    
     public Produto listar(int id) {
         ProdutoDAO produtoDAO = new ProdutoDAO();
         return produtoDAO.listarProduto(id);
@@ -64,4 +69,5 @@ public class ProdutoModel {
             return false;
         }
     }
+
 }

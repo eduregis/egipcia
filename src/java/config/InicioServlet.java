@@ -38,7 +38,7 @@ public class InicioServlet extends HttpServlet {
             throws ServletException, IOException {        
          ProdutoModel produtoModel = new ProdutoModel();
         /* Executa o método listar que gera uma lista com todas os produtos cadastrados */
-        List<Produto> produtos = produtoModel.listar();
+        List<Produto> produtos = produtoModel.listarEstoque();
         /* Grava a lista com todos os produtos cadastrados no objeto que representa a requisição */
         request.setAttribute("produtos", produtos);
         
