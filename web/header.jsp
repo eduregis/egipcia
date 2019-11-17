@@ -45,6 +45,7 @@
                             <a class="dropdown-item" href="ListarCliente">Clientes</a>
                             <a class="dropdown-item" href="ListarProduto">Produtos</a>
                             <a class="dropdown-item" href="ListarCategoria">Categorias</a>
+                            <a class="dropdown-item" href="shopping.jsp">Compras</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="report.jsp">Relatórios</a>
                         </div>
