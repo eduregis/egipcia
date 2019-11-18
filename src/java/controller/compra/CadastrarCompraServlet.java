@@ -51,10 +51,11 @@ public class CadastrarCompraServlet extends HttpServlet {
             Cookie ck = CookieUtils.obterCookie(request);
             if (ck != null) {
                 CompraModel compraModel = new CompraModel();
+                int id = compraModel.obterId();
                 // Pega a data atual para fazer a compra
                 Timestamp dataCompra = new Timestamp(System.currentTimeMillis());
                 // Inserindo tupla que representa a compra
-                compraModel.inserir(c.getId(), dataCompra);
+                compraModel.inserir(id, c.getId(), dataCompra);
                 // IMPORTANTE!!!
                 // Tentando pegar o id da compra recém criada, nas linhas acima
                 Compra compra = compraModel.listar(c.getId(), dataCompra);
@@ -67,7 +68,7 @@ public class CadastrarCompraServlet extends HttpServlet {
                     // compraProdutoModel.inserir(compra.getId(), cci.getProduto().getId(), cci.getQuantidade());
                     // substituto temporário
                     produtoModel.atualizarEstoque(cci.getProduto().getId(), cci.getQuantidade());
-                    compraProdutoModel.inserir(1, cci.getProduto().getId(), cci.getQuantidade());
+                    compraProdutoModel.inserir(id, cci.getProduto().getId(), cci.getQuantidade());
                 }
                 // limpa o cookie do carrinho de compras
                 ck.setValue("");

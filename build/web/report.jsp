@@ -16,18 +16,20 @@
             <div class="mt-3 ml-3 py-3">
                 <h1 style="color: #58889C">Relatórios</h1>
                 <hr>
-            </div>            
-            <div class="row">
-                <h2 style="color: #58889C">Total de compras por cliente</h2>
-                <hr>
-            </div>
-            <div class="row">
-                <h2 style="color: #58889C">Produtos em falta no estoque</h2>
-                <hr>
-            </div>
-            <div class="row">
-                <h2 style="color: #58889C">Total de valor recebido por dia</h2>
-                <hr>
+            </div>          
+            <div class="mt-3 ml-5 py-3">
+                <div class="row">
+                    <h2 style="color: #58889C">Total de compras por cliente</h2>
+                    <hr>
+                </div>
+                <div class="row">
+                    <h2 style="color: #58889C">Produtos em falta no estoque</h2>
+                    <hr>
+                </div>
+                <div class="row">
+                    <h2 style="color: #58889C">Total de valor recebido por dia</h2>
+                    <hr>
+                </div>
             </div>
         </div>
     </body>

@@ -29,6 +29,26 @@ public class CompraDAO {
     private static final String JDBC_USUARIO = "postgres";
     private static final String JDBC_SENHA = "123456";
 
+    public int obterId() {
+        int id = -1;
+        try {
+            Class.forName(JDBC_DRIVER);
+            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT nextval('compras_id_seq') AS id");
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+                
+            }
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (Exception ex) {
+            return id;
+        }
+        return id;
+    }
+    
     /**
      * Método utilizado para listar todos as compras registradas
      *
@@ -152,14 +172,15 @@ public class CompraDAO {
      * @param data
      * @return
      */
-    public boolean inserir(int cliente_id, Timestamp data) {
+    public boolean inserir(int compra_id, int cliente_id, Timestamp data) {
         boolean resultado = false;
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO compras (cliente_id, data_compra) VALUES (?, ?)");
-            preparedStatement.setInt(1, cliente_id);
-            preparedStatement.setTimestamp(2, data);
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO compras (id, cliente_id, data_compra) VALUES (?, ?, ?)");
+            preparedStatement.setInt(1, compra_id);
+            preparedStatement.setInt(2, cliente_id);
+            preparedStatement.setTimestamp(3, data);
             resultado = (preparedStatement.executeUpdate() > 0);
             preparedStatement.close();
             connection.close();

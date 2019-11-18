@@ -15,9 +15,14 @@ import java.util.List;
  */
 public class CompraModel {
 
-    public boolean inserir(int cliente_id, Timestamp data) {
+    public int obterId() {
         CompraDAO dao = new CompraDAO();
-        return dao.inserir(cliente_id, data);
+        return dao.obterId();
+    }
+    
+    public boolean inserir(int compra_id, int cliente_id, Timestamp data) {
+        CompraDAO dao = new CompraDAO();
+        return dao.inserir(compra_id, cliente_id, data);
     }
     
     public List<Compra> listar() {
