@@ -120,6 +120,10 @@
         <servlet-name>ListarCompraServlet</servlet-name>
         <servlet-class>controller.compra.ListarCompraServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeletarCompraProdutoServlet</servlet-name>
+        <servlet-class>controller.compraProduto.DeletarCompraProdutoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -239,6 +243,10 @@
     <servlet-mapping>
         <servlet-name>ListarCompraServlet</servlet-name>
         <url-pattern>/ListarCompraServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletarCompraProdutoServlet</servlet-name>
+        <url-pattern>/DeletarCompraProdutoServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

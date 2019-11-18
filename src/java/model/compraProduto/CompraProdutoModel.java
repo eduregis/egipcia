@@ -22,4 +22,13 @@ public class CompraProdutoModel {
         CompraProdutoDAO compraProdutoDAO = new CompraProdutoDAO();
         return compraProdutoDAO.listarCompraProdutoPorCompra_id(id);
     }
+    
+    public boolean deletar(int compra_id, int produto_id){
+        if (compra_id > 0 && produto_id > 0){
+            CompraProdutoDAO compraProdutoDAO = new CompraProdutoDAO();
+            return compraProdutoDAO.deletar(compra_id, produto_id);
+        } else {
+            return false;
+        }
+    }
 }

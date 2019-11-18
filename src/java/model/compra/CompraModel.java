@@ -42,8 +42,8 @@ public class CompraModel {
     
     public boolean deletar(int id){
         if (id > 0){
-            CompraDAO clienteDAO = new CompraDAO();
-            return clienteDAO.deletar(id);
+            CompraDAO compraDAO = new CompraDAO();
+            return compraDAO.deletar(id);
         } else {
             return false;
         }

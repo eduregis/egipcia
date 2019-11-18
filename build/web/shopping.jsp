@@ -45,7 +45,8 @@
                                         <th scope="col">Nome do Cliente</th>
                                         <th scope="col">Nome do Produto</th>
                                         <th scope="col">Quantidade</th>
-                                        <th scope="col">Data da compra</th>    
+                                        <th scope="col">Data da compra</th>
+                                        <th width="100px" scope="col">&nbsp;</th>    
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,6 +65,11 @@
                                         <td><%=p.getNome()%></td>
                                         <td><%=cp.getQuantidade() %></td>
                                         <td><%=c.getData() %></td>
+                                        <td>
+                                            <a href="DeletarCompraProdutoServlet?compra_id=<%= cp.getCompra_id() %>&produto_id=<%= cp.getProduto_id() %>">
+                                                <img src="assets/rubbish-bin.png">
+                                            </a>
+                                        </td>
                                     </tr>
                                     <%
                                         }
