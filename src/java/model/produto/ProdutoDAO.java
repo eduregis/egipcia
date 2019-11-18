@@ -86,6 +86,32 @@ public class ProdutoDAO {
         return resultado;
     }
     
+    public List<Produto> listarProdutosForaDeEstoque() {
+        List<Produto> resultado = new ArrayList<Produto>();
+        try {
+            Class.forName(JDBC_DRIVER);
+            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT id, nome, descricao, qtd, preco, imagem FROM produtos WHERE qtd = 0");
+            while (resultSet.next()) {
+                Produto produto = new Produto();
+                produto.setId(resultSet.getInt("id"));
+                produto.setNome(resultSet.getString("nome"));
+                produto.setDescricao(resultSet.getString("descricao"));
+                produto.setQuantidade(resultSet.getInt("qtd"));
+                produto.setPreco(resultSet.getDouble("preco"));
+                produto.setFoto(resultSet.getString("imagem"));
+                resultado.add(produto);
+            }
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (Exception ex) {
+            return new ArrayList<Produto>();
+        }
+        return resultado;
+    }
+    
     /**
      * Método utilizado para listar um produto pelo id
      *

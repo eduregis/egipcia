@@ -124,6 +124,30 @@
         <servlet-name>DeletarCompraProdutoServlet</servlet-name>
         <servlet-class>controller.compraProduto.DeletarCompraProdutoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RelatorioXLSTotalCompraPorClienteServlet</servlet-name>
+        <servlet-class>controller.relatorios.RelatorioXLSTotalCompraPorClienteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RelatorioDOCTotalCompraPorClienteServlet</servlet-name>
+        <servlet-class>controller.relatorios.RelatorioDOCTotalCompraPorClienteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RelatorioPDFTotalCompraPorClienteServlet</servlet-name>
+        <servlet-class>controller.relatorios.RelatorioPDFTotalCompraPorClienteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RelatorioXLSProdutoForaDeEstoqueServlet</servlet-name>
+        <servlet-class>controller.relatorios.RelatorioXLSProdutoForaDeEstoqueServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RelatorioDOCProdutoForaDeEstoqueServlet</servlet-name>
+        <servlet-class>controller.relatorios.RelatorioDOCProdutoForaDeEstoqueServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RelatorioPDFProdutoForaDeEstoqueServlet</servlet-name>
+        <servlet-class>controller.relatorios.RelatorioPDFProdutoForaDeEstoqueServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -247,6 +271,30 @@
     <servlet-mapping>
         <servlet-name>DeletarCompraProdutoServlet</servlet-name>
         <url-pattern>/DeletarCompraProdutoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioXLSTotalCompraPorClienteServlet</servlet-name>
+        <url-pattern>/RelatorioXLSTotalCompraPorClienteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioDOCTotalCompraPorClienteServlet</servlet-name>
+        <url-pattern>/RelatorioDOCTotalCompraPorClienteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioPDFTotalCompraPorClienteServlet</servlet-name>
+        <url-pattern>/RelatorioPDFTotalCompraPorClienteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioXLSProdutoForaDeEstoqueServlet</servlet-name>
+        <url-pattern>/RelatorioXLSProdutoForaDeEstoqueServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioDOCProdutoForaDeEstoqueServlet</servlet-name>
+        <url-pattern>/RelatorioDOCProdutoForaDeEstoqueServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioPDFProdutoForaDeEstoqueServlet</servlet-name>
+        <url-pattern>/RelatorioPDFProdutoForaDeEstoqueServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
