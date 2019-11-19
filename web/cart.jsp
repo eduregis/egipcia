@@ -1,3 +1,6 @@
+<%@page import="model.categoria.CategoriaModel"%>
+<%@page import="model.produtoCategoria.ProdutoCategoria"%>
+<%@page import="model.produtoCategoria.ProdutoCategoriaModel"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="model.produto.ProdutoDAO"%>
 <%@page import="model.carrinhocompra.CarrinhoCompraItem"%>
@@ -51,7 +54,18 @@
                         <p class="card-text"><%= cci.getProduto().getPreco() %></p>                            
                         <p class="card-text">Descrição: <%= cci.getProduto().getDescricao() %></p>
                         <p style="color: #51aa3a"><%= cci.getQuantidade() %> no carrinho</p>
-                        <h6>Tags: <span class="badge badge-secondary">Tag1</span> <span class="badge badge-secondary">Tag2</span></h6>
+                        <h6>Tags: 
+                            <%
+                                ProdutoCategoriaModel produtoCategoriaModel = new ProdutoCategoriaModel();
+                                List<ProdutoCategoria> produtoCategorias = produtoCategoriaModel.listar(cci.getProduto().getId());
+                                for (ProdutoCategoria pc: produtoCategorias) {
+                                    CategoriaModel categoriaModel = new CategoriaModel();
+                            %>
+                            <span class="badge badge-secondary"><%=categoriaModel.listar(pc.getCategoria_id()).getDescricao() %></span>
+                            <%
+                            }
+                            %>
+                        </h6>
                         <button onclick="document.location='RemoverProdutoCarrinhoCompraServlet?produtoId=<%= cci.getProduto().getId() %>';" class="btn dark my-2" type="submit" style="background-color: #E97568">Remover do carrinho</button>
                     </div>                              
                 </div>
