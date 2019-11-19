@@ -18,8 +18,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.cliente.ClienteDAO;
+import model.cliente.ClienteModel;
+import model.compra.CompraDAO;
 import model.produto.Produto;
 import model.produto.ProdutoDAO;
+import model.relatorios.ComprasPorCliente;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -49,7 +53,7 @@ public class RelatorioDOCTotalCompraPorClienteServlet extends HttpServlet {
         XWPFParagraph titulo = documento.createParagraph();
         titulo.setAlignment(ParagraphAlignment.CENTER);
         XWPFRun tituloConteudo = titulo.createRun();
-        tituloConteudo.setText("Produtos Cadastrados");
+        tituloConteudo.setText("Total de Compras por Cliente");
         tituloConteudo.setColor("000000");
         tituloConteudo.setBold(true);
         tituloConteudo.setFontFamily("Times");
@@ -58,21 +62,22 @@ public class RelatorioDOCTotalCompraPorClienteServlet extends HttpServlet {
         XWPFTable tabelaProdutos = documento.createTable();
 
         XWPFTableRow tabelaLinhaTitulo = tabelaProdutos.getRow(0);
-        tabelaLinhaTitulo.getCell(0).setText("Id");
-        tabelaLinhaTitulo.addNewTableCell().setText("Descrição");
-        tabelaLinhaTitulo.addNewTableCell().setText("Preço (R$)");
+        tabelaLinhaTitulo.getCell(0).setText("Id do cliente");
+        tabelaLinhaTitulo.addNewTableCell().setText("Nome do Cliente");
+        tabelaLinhaTitulo.addNewTableCell().setText("Número de compras");
 
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        List<Produto> produtos = produtoDAO.listarProdutos();
+        CompraDAO compraDAO = new CompraDAO();
+        ClienteModel clienteModel = new ClienteModel();
+        List<ComprasPorCliente> cpcs = compraDAO.listarComprasPorCliente();
 
         NumberFormat numberFormat = new DecimalFormat ("#,##0.00", new DecimalFormatSymbols(new Locale ("pt", "BR")));
-        for (int i = 0; produtos != null && i < produtos.size(); i++) {
-            Produto p = produtos.get(i);
-
+        for (int i = 0; cpcs != null && i < cpcs.size(); i++) {
+            ComprasPorCliente cpc = cpcs.get(i);
             XWPFTableRow tabelaLinhaConteudo = tabelaProdutos.createRow();
-            tabelaLinhaConteudo.getCell(0).setText(String.valueOf(p.getId()));
-            tabelaLinhaConteudo.getCell(1).setText(p.getDescricao());
-            tabelaLinhaConteudo.getCell(2).setText(numberFormat.format(p.getPreco()));
+            tabelaLinhaConteudo.getCell(0).setText(String.valueOf(cpc.getCliente_id()));
+            tabelaLinhaConteudo.getCell(1).setText(String.valueOf(clienteModel.listar(cpc.getCliente_id()).getNome()));
+            tabelaLinhaConteudo.getCell(2).setText(String.valueOf(cpc.getQtd()));
+            
         }
         
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -80,7 +85,7 @@ public class RelatorioDOCTotalCompraPorClienteServlet extends HttpServlet {
         byte[] byteOutputArray = byteArrayOutputStream.toByteArray();
 
         response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment; filename=produtos.doc");
+        response.setHeader("Content-Disposition", "attachment; filename=comprasPorClientes.doc");
         response.setContentLength(byteOutputArray.length);
 
         try (OutputStream outputStream = response.getOutputStream()) {

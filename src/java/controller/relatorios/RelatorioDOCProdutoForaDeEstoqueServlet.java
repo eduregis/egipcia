@@ -80,7 +80,7 @@ public class RelatorioDOCProdutoForaDeEstoqueServlet extends HttpServlet {
         byte[] byteOutputArray = byteArrayOutputStream.toByteArray();
 
         response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment; filename=produtos.doc");
+        response.setHeader("Content-Disposition", "attachment; filename=produtosForaDeEstoque.doc");
         response.setContentLength(byteOutputArray.length);
 
         try (OutputStream outputStream = response.getOutputStream()) {

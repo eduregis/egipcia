@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import model.relatorios.ComprasPorCliente;
 
 /**
  *
@@ -47,6 +48,29 @@ public class CompraDAO {
             return id;
         }
         return id;
+    }
+    
+    public List<ComprasPorCliente> listarComprasPorCliente(){
+        List<ComprasPorCliente> resultado = new ArrayList<ComprasPorCliente>();
+        try {
+            Class.forName(JDBC_DRIVER);
+            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT cliente_id, COUNT(*) AS total FROM compras group by cliente_id");
+            while (resultSet.next()) {
+                ComprasPorCliente cpc = new ComprasPorCliente();
+                cpc.setCliente_id(resultSet.getInt("cliente_id"));
+                cpc.setQtd(resultSet.getInt("total"));
+                resultado.add(cpc);
+            }
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<ComprasPorCliente>();
+        }
+        return resultado;
     }
     
     /**
