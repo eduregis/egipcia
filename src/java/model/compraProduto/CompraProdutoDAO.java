@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import model.relatorios.ValorRecebidoPorDia;
 
 /**
  *
@@ -113,6 +114,35 @@ public class CompraProdutoDAO {
             return null;
         }
         return compraProduto;
+    }
+    
+    public List<ValorRecebidoPorDia> listarValorRecebidoPorDia(){
+        List<ValorRecebidoPorDia> resultado = new ArrayList<ValorRecebidoPorDia>();
+        try {
+            Class.forName(JDBC_DRIVER);
+            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            PreparedStatement preparedStatement = connection.prepareCall("select SUM(p.preco * cp.qtd) AS total, cast(c.data_compra AS date) AS stat_day from produtos p\n" +
+                                                                        "join compras_produtos cp\n" +
+                                                                        "on cp.produto_id = p.id\n" +
+                                                                        "join compras c\n" +
+                                                                        "on cp.compra_id = c.id\n" +
+                                                                        "GROUP BY cast(c.data_compra as date)\n" +
+                                                                        "order by stat_day;");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                ValorRecebidoPorDia vrpd = new ValorRecebidoPorDia();
+                vrpd.setDia(resultSet.getDate("stat_day"));
+                vrpd.setValor(resultSet.getDouble("total"));
+                resultado.add(vrpd);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<ValorRecebidoPorDia>();
+        }
+        return resultado;
     }
 
     /**

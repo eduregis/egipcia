@@ -41,7 +41,7 @@
                 </div>
                 <div class="row">
                     <button onclick="document.location = 'RelatorioXLSTotalRecebidoPorDiaServlet';" class="btn dark m-3" style="background-color: #E97568">Baixar como planilha</button>
-                    <button onclick="document.location = 'RelatorioDOCTotalRecebidoPorDiaServlet';" class="btn dark m-3" style="background-color: #E97568">Baixar como .doc</button>
+                    <button onclick="document.location = 'RelatorioDOCValorRecebidoPorDiaServlet';" class="btn dark m-3" style="background-color: #E97568">Baixar como .doc</button>
                     <button onclick="document.location = 'RelatorioPDFTotalRecebidoPorDiaServlet';" class="btn dark m-3" style="background-color: #E97568">Baixar como pdf</button>
                 </div>
                 <hr>

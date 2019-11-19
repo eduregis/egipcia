@@ -148,6 +148,10 @@
         <servlet-name>RelatorioPDFProdutoForaDeEstoqueServlet</servlet-name>
         <servlet-class>controller.relatorios.RelatorioPDFProdutoForaDeEstoqueServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RelatorioDOCValorRecebidoPorDiaServlet</servlet-name>
+        <servlet-class>controller.relatorios.RelatorioDOCValorRecebidoPorDiaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -295,6 +299,10 @@
     <servlet-mapping>
         <servlet-name>RelatorioPDFProdutoForaDeEstoqueServlet</servlet-name>
         <url-pattern>/RelatorioPDFProdutoForaDeEstoqueServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioDOCValorRecebidoPorDiaServlet</servlet-name>
+        <url-pattern>/RelatorioDOCValorRecebidoPorDiaServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
