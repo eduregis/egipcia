@@ -18,8 +18,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.cliente.ClienteModel;
+import model.compra.CompraDAO;
 import model.produto.Produto;
 import model.produto.ProdutoDAO;
+import model.relatorios.ComprasPorCliente;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -45,9 +48,10 @@ public class RelatorioPDFTotalCompraPorClienteServlet extends HttpServlet {
             throws ServletException, IOException {
         PDDocument documento = new PDDocument();
 
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        List<Produto> produtos = produtoDAO.listarProdutos();
-        produtos.addAll(produtoDAO.listarProdutos());
+        CompraDAO compraDAO = new CompraDAO();
+        ClienteModel clienteModel = new ClienteModel();
+        List<ComprasPorCliente> cpcs = compraDAO.listarComprasPorCliente();
+
 
         PDPage pagina = new PDPage(PDRectangle.A4);
         PDPageContentStream conteudoPagina = new PDPageContentStream(documento, pagina);
@@ -55,19 +59,18 @@ public class RelatorioPDFTotalCompraPorClienteServlet extends HttpServlet {
         conteudoPagina.newLineAtOffset(10, 820);
         conteudoPagina.setFont(PDType1Font.TIMES_BOLD, 12f);
         conteudoPagina.setLeading(14.5f);
-        conteudoPagina.showText("Produtos Cadastrados");
+        conteudoPagina.showText("Total de Compras por Cliente");
         conteudoPagina.newLine();
         conteudoPagina.setFont(PDType1Font.COURIER, 8f);
         conteudoPagina.setLeading(8.5f);
 
         int linha = 1;
-        NumberFormat numberFormat = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR")));
-        for (int i = 0; produtos != null && i < produtos.size(); i++) {
-            Produto p = produtos.get(i);
+        for (int i = 0; cpcs != null && i < cpcs.size(); i++) {
+            ComprasPorCliente cpc = cpcs.get(i);
 
-            String id = String.valueOf(p.getId());
-            String descricao = p.getDescricao();
-            String preco = numberFormat.format(p.getPreco());
+            String id = String.valueOf(cpc.getCliente_id());
+            String descricao = clienteModel.listar(cpc.getCliente_id()).getNome();
+            String preco = String.valueOf(cpc.getQtd());
             while ((id + " " + descricao + " " + preco).length() > 120) {
                 descricao = descricao.substring(0, descricao.length() - 1);
             }
@@ -83,7 +86,7 @@ public class RelatorioPDFTotalCompraPorClienteServlet extends HttpServlet {
                 conteudoPagina.endText();
                 conteudoPagina.close();
                 documento.addPage(pagina);
-                if (i == produtos.size() - 1) {
+                if (i == cpcs.size() - 1) {
                     break;
                 }
                 pagina = new PDPage(PDRectangle.A4);
@@ -93,7 +96,7 @@ public class RelatorioPDFTotalCompraPorClienteServlet extends HttpServlet {
                 conteudoPagina.setFont(PDType1Font.COURIER, 8f);
                 conteudoPagina.setLeading(8.5f);
             }
-            if (i == produtos.size() - 1) {
+            if (i == cpcs.size() - 1) {
                 conteudoPagina.endText();
                 conteudoPagina.close();
                 documento.addPage(pagina);
@@ -106,7 +109,7 @@ public class RelatorioPDFTotalCompraPorClienteServlet extends HttpServlet {
         byte[] byteOutputArray = byteArrayOutputStream.toByteArray();
 
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment; filename=produtos.pdf");
+        response.setHeader("Content-Disposition", "attachment; filename=comprasPorCliente.pdf");
         response.setContentLength(byteOutputArray.length);
 
         try (OutputStream outputStream = response.getOutputStream()) {

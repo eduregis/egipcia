@@ -105,7 +105,7 @@ public class RelatorioPDFProdutoForaDeEstoqueServlet extends HttpServlet {
         byte[] byteOutputArray = byteArrayOutputStream.toByteArray();
 
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment; filename=produtos.pdf");
+        response.setHeader("Content-Disposition", "attachment; filename=produtosForaDeEstoque.pdf");
         response.setContentLength(byteOutputArray.length);
 
         try (OutputStream outputStream = response.getOutputStream()) {

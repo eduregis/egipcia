@@ -14,8 +14,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.cliente.ClienteModel;
+import model.compra.CompraDAO;
 import model.produto.Produto;
 import model.produto.ProdutoDAO;
+import model.relatorios.ComprasPorCliente;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -39,14 +42,16 @@ public class RelatorioXLSTotalCompraPorClienteServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HSSFWorkbook workbook = new HSSFWorkbook();
-        HSSFSheet sheetProdutos = workbook.createSheet("Produtos");
-
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        List<Produto> produtos = produtoDAO.listarProdutos();
+        HSSFSheet sheetProdutos = workbook.createSheet("Total de Vendas por Cliente");
+        
+        CompraDAO compraDAO = new CompraDAO();
+        ClienteModel clienteModel = new ClienteModel();
+        List<ComprasPorCliente> cpcs = compraDAO.listarComprasPorCliente();
 
         int numeroLinha = 0;
 
-        for (int i = 0; produtos != null && i < produtos.size(); i++) {
+        for (int i = 0; cpcs != null && i < cpcs.size(); i++) {
+            ComprasPorCliente cpc = cpcs.get(i);
             Row linha = null;
             if (i == 0) {
                 linha = sheetProdutos.createRow(numeroLinha++);
@@ -55,24 +60,22 @@ public class RelatorioXLSTotalCompraPorClienteServlet extends HttpServlet {
                 cellId.setCellValue("Id");
 
                 Cell cellDescricao = linha.createCell(1);
-                cellDescricao.setCellValue("Descrição");
+                cellDescricao.setCellValue("Nome");
 
                 Cell cellPreco = linha.createCell(2);
-                cellPreco.setCellValue("Preço");
+                cellPreco.setCellValue("Numero de compras");
             }
-
-            Produto p = produtos.get(i);
 
             linha = sheetProdutos.createRow(numeroLinha++);
 
             Cell cellId = linha.createCell(0);
-            cellId.setCellValue(p.getId());
+            cellId.setCellValue(cpc.getCliente_id());
 
             Cell cellDescricao = linha.createCell(1);
-            cellDescricao.setCellValue(p.getDescricao());
+            cellDescricao.setCellValue(clienteModel.listar(cpc.getCliente_id()).getNome());
 
             Cell cellPreco = linha.createCell(2);
-            cellPreco.setCellValue(p.getPreco());
+            cellPreco.setCellValue(cpc.getQtd());
         }
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -80,7 +83,7 @@ public class RelatorioXLSTotalCompraPorClienteServlet extends HttpServlet {
         byte[] byteOutputArray = byteArrayOutputStream.toByteArray();
 
         response.setContentType("application/ms-excel");
-        response.setHeader("Content-Disposition", "attachment; filename=produtos.xls");
+        response.setHeader("Content-Disposition", "attachment; filename=comprasPorCliente.xls");
         response.setContentLength(byteOutputArray.length);
 
         try (OutputStream outputStream = response.getOutputStream()) {

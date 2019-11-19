@@ -85,7 +85,7 @@ public class RelatorioDOCTotalCompraPorClienteServlet extends HttpServlet {
         byte[] byteOutputArray = byteArrayOutputStream.toByteArray();
 
         response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment; filename=comprasPorClientes.doc");
+        response.setHeader("Content-Disposition", "attachment; filename=comprasPorCliente.doc");
         response.setContentLength(byteOutputArray.length);
 
         try (OutputStream outputStream = response.getOutputStream()) {

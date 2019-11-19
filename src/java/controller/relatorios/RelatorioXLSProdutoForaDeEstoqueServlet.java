@@ -80,7 +80,7 @@ public class RelatorioXLSProdutoForaDeEstoqueServlet extends HttpServlet {
         byte[] byteOutputArray = byteArrayOutputStream.toByteArray();
 
         response.setContentType("application/ms-excel");
-        response.setHeader("Content-Disposition", "attachment; filename=produtos.xls");
+        response.setHeader("Content-Disposition", "attachment; filename=produtosForaDeEstoque.xls");
         response.setContentLength(byteOutputArray.length);
 
         try (OutputStream outputStream = response.getOutputStream()) {
