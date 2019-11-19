@@ -40,9 +40,9 @@
                     <h2 style="color: #58889C">Total de valor recebido por dia</h2>
                 </div>
                 <div class="row">
-                    <button onclick="document.location = 'RelatorioXLSTotalRecebidoPorDiaServlet';" class="btn dark m-3" style="background-color: #E97568">Baixar como planilha</button>
+                    <button onclick="document.location = 'RelatorioXLSValorRecebidoPorDiaServlet';" class="btn dark m-3" style="background-color: #E97568">Baixar como planilha</button>
                     <button onclick="document.location = 'RelatorioDOCValorRecebidoPorDiaServlet';" class="btn dark m-3" style="background-color: #E97568">Baixar como .doc</button>
-                    <button onclick="document.location = 'RelatorioPDFTotalRecebidoPorDiaServlet';" class="btn dark m-3" style="background-color: #E97568">Baixar como pdf</button>
+                    <button onclick="document.location = 'RelatorioPDFValorRecebidoPorDiaServlet';" class="btn dark m-3" style="background-color: #E97568">Baixar como pdf</button>
                 </div>
                 <hr>
             </div>

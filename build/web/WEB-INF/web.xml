@@ -152,6 +152,14 @@
         <servlet-name>RelatorioDOCValorRecebidoPorDiaServlet</servlet-name>
         <servlet-class>controller.relatorios.RelatorioDOCValorRecebidoPorDiaServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RelatorioPDFValorRecebidoPorDiaServlet</servlet-name>
+        <servlet-class>controller.relatorios.RelatorioPDFValorRecebidoPorDiaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RelatorioXLSValorRecebidoPorDiaServlet</servlet-name>
+        <servlet-class>controller.relatorios.RelatorioXLSValorRecebidoPorDiaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -303,6 +311,14 @@
     <servlet-mapping>
         <servlet-name>RelatorioDOCValorRecebidoPorDiaServlet</servlet-name>
         <url-pattern>/RelatorioDOCValorRecebidoPorDiaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioPDFValorRecebidoPorDiaServlet</servlet-name>
+        <url-pattern>/RelatorioPDFValorRecebidoPorDiaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioXLSValorRecebidoPorDiaServlet</servlet-name>
+        <url-pattern>/RelatorioXLSValorRecebidoPorDiaServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

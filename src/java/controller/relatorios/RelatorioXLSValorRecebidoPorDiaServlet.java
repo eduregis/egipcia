@@ -9,11 +9,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.text.NumberFormat;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,18 +21,16 @@ import model.compra.CompraDAO;
 import model.compraProduto.CompraProdutoDAO;
 import model.relatorios.ComprasPorCliente;
 import model.relatorios.ValorRecebidoPorDia;
-import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 
 /**
  *
  * @author eduardo
  */
-public class RelatorioDOCValorRecebidoPorDiaServlet extends HttpServlet {
+public class RelatorioXLSValorRecebidoPorDiaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,41 +43,43 @@ public class RelatorioDOCValorRecebidoPorDiaServlet extends HttpServlet {
      */
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        XWPFDocument documento = new XWPFDocument();
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheetProdutos = workbook.createSheet("Total de Vendas por Cliente");
         
-        XWPFParagraph titulo = documento.createParagraph();
-        titulo.setAlignment(ParagraphAlignment.CENTER);
-        XWPFRun tituloConteudo = titulo.createRun();
-        tituloConteudo.setText("Total de Compras por Cliente");
-        tituloConteudo.setColor("000000");
-        tituloConteudo.setBold(true);
-        tituloConteudo.setFontFamily("Times");
-        tituloConteudo.setFontSize(20);
-
-        XWPFTable tabelaProdutos = documento.createTable();
-
-        XWPFTableRow tabelaLinhaTitulo = tabelaProdutos.getRow(0);
-        tabelaLinhaTitulo.getCell(0).setText("Data");
-        tabelaLinhaTitulo.addNewTableCell().setText("Valor Recebido");
-
         CompraProdutoDAO compraProdutoDAO = new CompraProdutoDAO();
         List<ValorRecebidoPorDia> vrpds = compraProdutoDAO.listarValorRecebidoPorDia();
 
-        NumberFormat numberFormat = new DecimalFormat ("#,##0.00", new DecimalFormatSymbols(new Locale ("pt", "BR")));
+        int numeroLinha = 0;
+
         for (int i = 0; vrpds != null && i < vrpds.size(); i++) {
             ValorRecebidoPorDia vrpd = vrpds.get(i);
-            XWPFTableRow tabelaLinhaConteudo = tabelaProdutos.createRow();
-            tabelaLinhaConteudo.getCell(0).setText(String.valueOf(vrpd.getDia()));
-            tabelaLinhaConteudo.getCell(1).setText(String.valueOf(numberFormat.format(vrpd.getValor())));
-            
+            Row linha = null;
+            if (i == 0) {
+                linha = sheetProdutos.createRow(numeroLinha++);
+
+                Cell cellId = linha.createCell(0);
+                cellId.setCellValue("Data");
+
+                Cell cellDescricao = linha.createCell(1);
+                cellDescricao.setCellValue("Valor recebido");
+            }
+
+            linha = sheetProdutos.createRow(numeroLinha++);
+
+            Cell cellId = linha.createCell(0);
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+            cellId.setCellValue(dateFormat.format(vrpd.getDia()));
+
+            Cell cellDescricao = linha.createCell(1);
+            cellDescricao.setCellValue(vrpd.getValor());
         }
-        
+
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        documento.write(byteArrayOutputStream);
+        workbook.write(byteArrayOutputStream);
         byte[] byteOutputArray = byteArrayOutputStream.toByteArray();
 
-        response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment; filename=valorRecebidoPorDia.doc");
+        response.setContentType("application/ms-excel");
+        response.setHeader("Content-Disposition", "attachment; filename=comprasPorCliente.xls");
         response.setContentLength(byteOutputArray.length);
 
         try (OutputStream outputStream = response.getOutputStream()) {
