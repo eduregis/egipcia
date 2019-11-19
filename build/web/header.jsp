@@ -27,8 +27,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>                
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-3">
-                    <li class="nav-item active">
+                <ul class="navbar-nav ml-auto mr-3">
+                    <li class="nav-item">
                         <a class="nav-link" href="InicioServlet">Página Principal <span class="sr-only">(current)</span></a>
                     </li>   
                     <li class="nav-item">
@@ -52,14 +52,6 @@
                     </li>
                 <%
                     }
-                %>                
-                </ul>      
-                <form class="form-inline my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Procurar por..." aria-label="Search">
-                    <button class="btn dark my-sm-0" type="submit" style="background-color: #E97568">Procurar</button>
-                </form>
-                <ul class="navbar-nav ml-auto mr-3">
-                    <%
                         Cliente cliente = (Cliente) session.getAttribute("cliente");
                         boolean isClientLogged = (cliente != null && cliente instanceof Cliente);
                         if (isClientLogged) {

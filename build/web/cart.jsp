@@ -1,3 +1,6 @@
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.text.DecimalFormatSymbols"%>
+<%@page import="java.util.Locale"%>
 <%@page import="model.categoria.CategoriaModel"%>
 <%@page import="model.produtoCategoria.ProdutoCategoria"%>
 <%@page import="model.produtoCategoria.ProdutoCategoriaModel"%>
@@ -27,7 +30,7 @@
                 <h1 style="color: #58889C">Seu carrinho!</h1>
                 <hr>
             </div>            
-            <div class="row pb-3 pl-3">
+            <div class="row pb-3 mx-5">
             <%
                 
                 Cookie c = CookieUtils.obterCookie(request); // obtém o cookie da aplicação, caso exista
@@ -35,25 +38,29 @@
         if (c == null) {
             // caso o cookie já exista, resgata o carrinho de compras armazenado dentro do valor do cookie
         } else {
+            NumberFormat numberFormat = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR")));
             List<CarrinhoCompraItem> carrinhoCompra = CarrinhoCompraModel.obterCarrinhoCompra(c.getValue());
             for (int i = 0; i < carrinhoCompra.size(); i++) {
                 CarrinhoCompraItem cci = carrinhoCompra.get(i);
                 precoTotal = precoTotal + (cci.getProduto().getPreco() * cci.getQuantidade());
             %>
-            <div class="col-4 mb-3">
-                <div class="card" style="width: 18rem; border: solid 1px; color: #9A9174">
-                    <div class="card-img-top p-3 img-product-container">
-                        <% if (cci.getProduto().getFoto() != null && cci.getProduto().getFoto().trim().length() > 0) { %>
-                            <img id="foto" class="img-product" src="MostrarFotoProduto?foto=<%= cci.getProduto().getFoto()%>" />
-                        <% } else { %>
-                        <img class="img-product" src="assets/egipcia-logo-dark.png" alt="Card image cap">
-                        <% } %>
-                    </div>
+            <div class="col-4 mb-5">
+                <div class="card mx-auto" style="width: 18rem; border: solid 1px; color: #9A9174">
                     <div class="card-body">
-                        <h5 class="card-title"><%= cci.getProduto().getNome() %></h5>
-                        <p class="card-text"><%= cci.getProduto().getPreco() %></p>                            
-                        <p class="card-text">Descrição: <%= cci.getProduto().getDescricao() %></p>
-                        <p style="color: #51aa3a"><%= cci.getQuantidade() %> no carrinho</p>
+                        <div class="card-header-container">
+                            <div class="card-img-top p-3 img-product-container mr-3">
+                                <% if (cci.getProduto().getFoto() != null && cci.getProduto().getFoto().trim().length() > 0) {  %>
+                                    <img id="foto" class="img-product" src="MostrarFotoProduto?foto=<%= cci.getProduto().getFoto()%>" />
+                                <% } else { %>
+                                <img class="img-product" src="assets/egipcia-logo-dark.png" alt="Card image cap">
+                                <% } %>
+                            </div>
+                            <div>
+                                <h5 class="card-title"><%= cci.getProduto().getNome() %></h5>
+                                <p class="card-text" style="color: #51aa3a">R$ <%= numberFormat.format(cci.getProduto().getPreco())%></p>
+                                <p><%= cci.getQuantidade() %> no carrinho</p>
+                            </div>
+                        </div>
                         <h6>Tags: 
                             <%
                                 ProdutoCategoriaModel produtoCategoriaModel = new ProdutoCategoriaModel();
@@ -69,7 +76,7 @@
                         <button onclick="document.location='RemoverProdutoCarrinhoCompraServlet?produtoId=<%= cci.getProduto().getId() %>';" class="btn dark my-2" type="submit" style="background-color: #E97568">Remover do carrinho</button>
                     </div>                              
                 </div>
-            </div> 
+            </div>
             <%
                 }
             }
@@ -86,16 +93,18 @@
         </div>
     </body>
     <style>
-    .card-text-desc{
-        height: 81px;
+    .card-header-container{
+        display: flex;
     }
     .img-product-container{
+        width: 130px;
         display: flex;
         justify-content: center;
+        align-items: start;
     }
     .img-product{
-       height: 300px;
-       max-width: 250px;
+       height: 150px;
+       max-width: 125px;
     }
     </style>
 </html>
