@@ -50,23 +50,30 @@ public class CadastrarCompraServlet extends HttpServlet {
             // chama o cookie com o carrinho de compras, se tiver
             Cookie ck = CookieUtils.obterCookie(request);
             if (ck != null) {
+                ProdutoModel produtoModel = new ProdutoModel();
+                boolean estoqueInsuficiente = false;
+                List<CarrinhoCompraItem> carrinhoCompra = CarrinhoCompraModel.obterCarrinhoCompra(ck.getValue());
+                // testa se existem os produtos requisitados no estoque
+                for (int i = 0; i < carrinhoCompra.size(); i++) {
+                    CarrinhoCompraItem cci = carrinhoCompra.get(i);
+                    if(cci.getProduto().getQuantidade() < cci.getQuantidade()){
+                        estoqueInsuficiente = true;
+                    }
+                }
+                if(estoqueInsuficiente){
+                request.setAttribute("mensagem", "Não produtos o suficiente para esta demanda!");
+                request.getRequestDispatcher("InicioServlet").forward(request, response);  
+                } else {
                 CompraModel compraModel = new CompraModel();
                 int id = compraModel.obterId();
                 // Pega a data atual para fazer a compra
                 Timestamp dataCompra = new Timestamp(System.currentTimeMillis());
                 // Inserindo tupla que representa a compra
                 compraModel.inserir(id, c.getId(), dataCompra);
-                // IMPORTANTE!!!
-                // Tentando pegar o id da compra recém criada, nas linhas acima
                 Compra compra = compraModel.listar(c.getId(), dataCompra);
-                List<CarrinhoCompraItem> carrinhoCompra = CarrinhoCompraModel.obterCarrinhoCompra(ck.getValue());
                 CompraProdutoModel compraProdutoModel = new CompraProdutoModel();
-                ProdutoModel produtoModel = new ProdutoModel();
                 for (int i = 0; i < carrinhoCompra.size(); i++) {
                     CarrinhoCompraItem cci = carrinhoCompra.get(i);
-                    // a linha abaixo deve ser o código final
-                    // compraProdutoModel.inserir(compra.getId(), cci.getProduto().getId(), cci.getQuantidade());
-                    // substituto temporário
                     produtoModel.atualizarEstoque(cci.getProduto().getId(), cci.getQuantidade());
                     compraProdutoModel.inserir(id, cci.getProduto().getId(), cci.getQuantidade());
                 }
@@ -74,7 +81,8 @@ public class CadastrarCompraServlet extends HttpServlet {
                 ck.setValue("");
                 response.addCookie(ck);
                 request.setAttribute("mensagem", "A compra foi realizada com sucesso!");
-                request.getRequestDispatcher("InicioServlet").forward(request, response);                
+                request.getRequestDispatcher("InicioServlet").forward(request, response);  
+                }
             } else {
                 request.setAttribute("mensagem", "O carrinho ainda está vazio!");
                 request.getRequestDispatcher("InicioServlet").forward(request, response);

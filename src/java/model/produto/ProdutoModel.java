@@ -29,6 +29,11 @@ public class ProdutoModel {
         return produtoDAO.listarProdutosEstoque();
     }
     
+    public List<Produto> listarPorBusca(String nome) {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        return produtoDAO.listarProdutosBusca(nome);
+    }
+    
     public Produto listar(int id) {
         ProdutoDAO produtoDAO = new ProdutoDAO();
         return produtoDAO.listarProduto(id);

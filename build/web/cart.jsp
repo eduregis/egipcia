@@ -86,7 +86,7 @@
         </div>
             <form action="CadastrarCompraServlet" method="post" class="ml-3 mt-3" style="color: #58889C">
                 <div class="form-row">
-                    <h3>Preço total: R$ <%= dx %></h3>  
+                    <h3 class="logo-text">Preço total: R$ <%= dx %></h3>  
                 </div>                        
                 <button class="btn dark mt-3 mb-5 sm-0" type="submit" style="background-color: #E97568">Finalizar Pedido</button>
             </form>

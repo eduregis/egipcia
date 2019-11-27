@@ -86,6 +86,40 @@ public class ProdutoDAO {
         return resultado;
     }
     
+    public List<Produto> listarProdutosBusca(String nome) {
+        if (nome == null || nome.trim().length() == 0) {
+            nome = "%";
+        } else {
+            nome = "%" + nome + "%";
+        }
+        Produto produto = null;
+        List<Produto> resultado = new ArrayList<Produto>();
+        try {
+            Class.forName(JDBC_DRIVER);
+            try (
+                Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, nome, imagem, descricao, preco, qtd FROM produtos WHERE upper(nome) LIKE upper(?)")) {
+                preparedStatement.setString(1, nome);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        produto = new Produto();
+                        produto.setId(resultSet.getInt("id"));
+                        produto.setNome(resultSet.getString("nome"));
+                        produto.setDescricao(resultSet.getString("descricao"));
+                        produto.setFoto(resultSet.getString("imagem"));
+                        produto.setPreco(resultSet.getDouble("preco"));
+                        produto.setQuantidade(resultSet.getInt("qtd")); 
+                        resultado.add(produto);
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<Produto>();
+        }
+        return resultado;
+    }
+    
     public List<Produto> listarProdutosForaDeEstoque() {
         List<Produto> resultado = new ArrayList<Produto>();
         try {

@@ -25,7 +25,7 @@
     <%@include file="header.jsp"%>   
     <div class="container rounded mb-5" style="background-color: #F7EFE2">
         <div class="mt-3 mx-5 py-3">
-            <h1 style="color: #58889C">No estoque!</h1>
+            <h1 class="logo-text" style="color: #58889C">No estoque!</h1>
             <hr>
         </div>
         <%
